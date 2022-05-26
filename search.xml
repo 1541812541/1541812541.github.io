@@ -21,7 +21,7 @@
       <link href="blog/abc/"/>
       <url>blog/abc/</url>
       
-        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这是abc页面</p><p><img src="2.jpg" alt=""> </p>]]></content>
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>这是abc页面</p><p><img src="2.png" alt=""> </p>]]></content>
       
       
       
