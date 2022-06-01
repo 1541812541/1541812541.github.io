@@ -2000,6 +2000,10 @@ return str;
         function draw() {
           angle = angle + 3;
           myChart.setOption(option, true);
+          //6.图表大小跟随页面自适应
+        window.addEventListener('resize',function(){
+                myChart.resize();
+        })
           //window.requestAnimationFrame(draw);
         }
         if (timerId) {

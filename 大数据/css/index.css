@@ -185,18 +185,20 @@ header .showTime {
   width: 10.7125rem;
 }
 .map .countdown1 {
-  line-height: 0.9375rem;
+  height: 0.3125rem;
+  line-height: 0.3125rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.3125rem;
   text-align: center;
 }
 .map .countdown3 {
-  line-height: 0.9375rem;
+  height: 0.4375rem;
+  line-height: 0.4375rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.3125rem;
   text-align: center;
 }
 .map .countdown2 {
-  width: 10.7125rem;
+  width: 8.8375rem;
   height: 4.75rem;
 }
