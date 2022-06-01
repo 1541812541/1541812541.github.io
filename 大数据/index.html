@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入css文件 -->
+    <link rel="stylesheet" href="css/index.css" />
+   
+</head>
+<body>
+    <!-- 头部的盒子 -->
+    <header>
+        <!-- 放标题内容 -->
+        <h1>数据可视化-echarts-作业</h1>
+        <!-- 时间盒子 -->
+        <div class="showTime">当前时间：2020年3月17-0时54分14秒</div>
+        <script>
+          var t = null;
+          t = setTimeout(time, 1000); //開始运行
+          function time() {
+            clearTimeout(t); //清除定时器
+            dt = new Date();
+            var y = dt.getFullYear();
+            var mt = dt.getMonth() + 1;
+            var day = dt.getDate();
+            var h = dt.getHours(); //获取时
+            var m = dt.getMinutes(); //获取分
+            var s = dt.getSeconds(); //获取秒
+            document.querySelector(".showTime").innerHTML =
+              "当前时间：" +
+              y +
+              "年" +
+              mt +
+              "月" +
+              day +
+              "-" +
+              h +
+              "时" +
+              m +
+              "分" +
+              s +
+              "秒";
+            t = setTimeout(time, 1000); //设定定时器，循环运行
+          }
+        </script>
+    </header>
+    <!-- 页面主题部分一个最大的盒子mainbox里面有三等列 -->
+    <!-- section与div差不多只不过每个section必须对应不同主题 -->
+    <!-- 注意安装html5插件使用section.mainbox回车,配上父亲的flex可以保证里面的盒子在同一行 -->
+   <section class="mainbox">
+     <!-- 三个孩子.column*3回车 -->
+<!-- **左侧盒子** -->
+     <div class="column">
+       <!-- 第一列引入模板盒子panel(3个) -->
+       <!-- 第一列三个大盒子分别为继承panel的bar(柱状图)，line(折线图),pie(饼形图) -->
+<!-- 左侧第一个盒子bar(柱状图) -->
+       <div class="panel bar">
+         <!-- 标题模块 -->
+         <h2>柱状图-纵向</h2>
+         <!-- 图表模块 -->
+         <div class="chart">图表</div>
+         <!-- 引入panel-footer制作panel下折角 -->
+         <div class="panel-footer"></div>
+       </div>
+<!-- 左侧第二个盒子line（折线图） -->
+     <div class="panel line">
+      <!-- 标题模块 -->
+      <h2>折线图-标准</h2>
+      <!-- 图表模块 -->
+     <div class="chart">图表</div>
+     <!-- 引入panel-footer制作panel下折角 -->
+      <div class="panel-footer"></div>
+      </div>
+<!-- 左侧第三个盒子pie（饼形图） -->
+      <div class="panel pie">
+       <!-- 标题模块 -->
+      <h2>饼形图-标准</h2>
+       <!-- 图表模块 -->
+       <div class="chart">图表</div>
+        <!-- 引入panel-footer制作panel下折角 -->
+       <div class="panel-footer"></div>
+      </div>
+    </div>
+ <!-- **中间盒子**     -->
+     <div class="column">
+ <!-- 中间第一个盒子no       -->
+       <!-- 上下两个模块no模块(里面两部分，上hd(里面两个li)下bd(里面两个li))和map模块 -->
+          <!-- no模块制作 -->
+          <div class="no">
+            <!-- hd制作 -->
+            <div class="no-hd">
+              <ul>
+                <li>123456</li>
+                <li>123</li>
+              </ul>
+            </div>
+            <!-- bd制作 -->
+            <div class="no-bd">
+              <ul>
+                <li>前端需求人数</li>
+                <li>市场供应人数</li>
+              </ul>
+            </div>
+          </div>
+<!-- 中间第二个盒子map           -->
+    <div class="map">
+      <div class="map1"></div>
+      <!-- 第一条数据 -->
+      <div class="countdown1"></div>
+      <!-- 第二条数据 -->
+      <div class="countdown3"></div>
+      <div class="countdown2"></div>
+      
+      </div>
+    </div>
+       </div>
+<!-- **右侧盒子**  -->
+    <!-- 右侧跟左侧一模一样，名字改一下 -->
+     <div class="column">
+<!-- 右侧第一个盒子bar(柱状图) -->
+      <div class="panel bar2">
+        <!-- 标题模块 -->
+        <h2>柱形图-横向</h2>
+        <!-- 图表模块 -->
+        <div class="chart">图表</div>
+        <!-- 引入panel-footer制作panel下折角 -->
+        <div class="panel-footer"></div>
+      </div>
+<!-- 右侧第二个盒子line（折线图） -->
+    <div class="panel line2">
+     <!-- 标题模块 -->
+     <h2>折线图-填充式</h2>
+     <!-- 图表模块 -->
+    <div class="chart">图表</div>
+    <!-- 引入panel-footer制作panel下折角 -->
+     <div class="panel-footer"></div>
+     </div>
+<!-- 右侧第三个盒子pie（饼形图）-->
+     <div class="panel pie2">
+      <!-- 标题模块 -->
+     <h2>饼形图-玫瑰</h2>
+      <!-- 图表模块 -->
+      <div class="chart">图表</div>
+       <!-- 引入panel-footer制作panel下折角 -->
+      <div class="panel-footer"></div>
+     </div>  
+  </div>
+    </section>
+    
+        <!-- 引入flexible.js用来做适配拉伸， -->
+    <script src="js/flexible.js"></script>
+    <!-- 1rem=80px 1、cssrem插件Root Font Size改80 2、flexible.js中function setRemUnit() {
+    var rem = docEl.clientWidth / 24; -->
+    <!-- 引入echarts所有图表包echarts.min.js -->
+    <script src="js/echarts.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
+    <!-- echarts使用    一.下载并引入echarts.js文件
+      1.官网点击下载 ，dist
+      2.<script src="echart.js文件路径"</script>
+      比如<script src="js/echart.min.js"</script>
+    二.准备一个具备大小dom容器
+    三.初始化echarts实例对象
+      1.<script>
+        var myChart= echarts.init(document.querySelector(".dom容器名"));
+        比如var myChart= echarts.init(document.querySelector(".box"));
+      </script>
+    四.指定配置项和数据（option）
+       复制官方 var option 并进行修改
+      1.title:图表标题
+      2.tooltip:鼠标放上提示信息的触发方式，折线图为axis(坐标轴),其他为item
+      3.legend:展示每条数据线的含义
+      4.toolbox:工具箱组件，设置能否保存图片
+      5.grid:网格配置 控制图表大小（距离dom容器的距离，显示刻度）
+      6.xAxis:x轴配置 type,类型：category-类目（横坐标文字）value-数值（横坐标数据）
+              boundaryGap,图与左侧坐标轴有没有缝隙
+               data,x轴显示的数据
+      7.series:数组，每个对象代表一条线，里面的data是数据决定了走向
+                name-每条线的名字,type-类型，stake-数据堆叠，此条显示数据=前n组数据+本组数据
+      8.color: []-数组，设置每条线的颜色         
+
+    五.将配置项给echarts实例对象
+       1.myChart.setOption(option); -->

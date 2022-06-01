@@ -1,0 +1,262 @@
+// less通过插件easy less可转换为CSS
+// css初始化
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+// 背景图片不显示就把.body改成body
+body{
+    background: url(../images/bg.jpg)
+    no-repeat top center;
+    // 1.15倍行距
+    line-height: 1.15;
+}
+header{
+    // 相对定位使得header中的盒子的不跑出去
+    position: relative;
+    height: 1.25rem;
+   background: url(../images/head_bg.png)
+   no-repeat;
+//    背景缩放水平100%垂直100%
+   background-size: 100% 100%;
+// h1部分
+    //白色 38像素 居中显示 行高为80像素
+    h1{
+        font-size: .475rem;
+        color: #fff;
+        text-align: center;
+        line-height: 1rem;
+
+    }
+// showTime盒子部分
+    //定位右侧 right为30px 行高为75px 文字颜色为：rgba（255，255，255，0.7）文字大小20px
+    .showTime{
+        position: absolute;
+        // 顶部与父header顶部的距离0
+        top: 0;
+        right: .375rem;
+        line-height: .9375rem;
+        color: rgba(255,255, 255, 0.7);
+        font-size: .25rem;
+    }
+ 
+}
+// **页面主体盒子（header下的）（网页分为上header和下mainbox两大块）
+    //最小宽度1024px,最大宽度1920px,不要转换rem,写死防止过大过小
+    //居中对齐，padding内边距10px.column列容器(父亲display flex)分三列占比3：5:3
+
+.mainbox{
+    display: flex;
+    min-width: 1024px;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: .125rem .125rem 0;
+    .column{
+        //每个列盒子占比3
+        flex: 3;
+        
+           }
+        // 第二个盒子占比设置5,外边距左右10px,下15px
+     & :nth-child(2){
+         margin: 0 .125rem .1875rem;    
+         flex: 5;
+     }
+    //  模板panel盒子高度310px，1像素的1px solid rgba(25,186,139,0.17)边框
+    // 背景图片line.jpg,padding(内边距)为上为0 左右15px 下为40px,下外边距15px(下面的盒子会保持15px的距离)
+    // 利用panel 盒子before和after 制作上面两个角大小10px 线条为2px solid #02a6b5
+    // 新加一个盒子before和after制作下侧两个角 宽度高度10px
+// **模板盒子panel**
+    .panel{
+        height: 3.875rem;
+        position: relative;
+        border: 1px solid rgba(25, 186, 139, 0.17);
+        background-image: url(../images/line\(1\).png)rgba(255,255,255,0.03);
+        padding: 0 .1875rem .5rem;
+        margin-bottom: .1875rem;
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #02a6b5;
+            border-left: 2px solid #02a6b5;
+          }
+          &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #02a6b5;
+            border-right: 2px solid #02a6b5;
+          }
+          .panel-footer {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            &::before {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              content: "";
+              width: 10px;
+              height: 10px;
+              border-bottom: 2px solid #02a6b5;
+              border-left: 2px solid #02a6b5;
+            }
+            &::after {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              content: "";
+              width: 10px;
+              height: 10px;
+              border-bottom: 2px solid #02a6b5;
+              border-right: 2px solid #02a6b5;
+            }
+          }
+        //   h2高度48px,文字颜色白色，居中，文字大小20px
+        h2{
+            height: .6rem;
+            color: #fff;
+            line-height: .6rem;
+            text-align: center;
+            font-size: .25rems;
+            font-weight: 400;
+        }
+        // 图表盒子高度240px,
+        .chart{
+            height: 3rem;
+            // background-color: pink;
+        }
+    }
+}
+//**中间盒子
+   // **no数字模块
+   //并没有设置高度，让里面的两个hd,bd设置高度后自然给no撑开
+    //  背景颜色rgba(101,132,226,0.1),内边距15px
+.no{
+    background-color:rgba(101,132,226,0.1) ;
+    padding: .1875rem;
+    //no-hd模块边框1px solid rgba(25,186,139,0.17)
+     .no-hd{
+         //子绝父相
+         position: relative;
+         border: 1px solid rgba(25,186,139,0.17);
+        //  给no-hd加个小角利用after和before，边框:2px solid #02a6b5宽度30px,高度10px
+         &::before{
+             position: absolute;
+             top: 0;
+             left: 0;
+             content: "";
+             width: 30px;
+             height: 10px;
+             border-top: 2px solid #02a6b5;
+             border-left: 2px solid #02a6b5;
+
+         }
+         &::after{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            content: "";
+            width: 30px;
+            height: 10px;
+            border-right: 2px solid #02a6b5;
+            border-bottom: 2px solid #02a6b5;
+
+        }
+        //  ul使用flex分成两份，每个li各占一份即占比1
+         ul{
+            display: flex;
+            //每个li 80px,文字大小70px,颜色#ffeb7b,文字居中,去除原点（样式）
+            //使用图标字体electronicFont先声明并引入DS-DIGIT.TTF文件
+            //中间有个竖线：给第一个li after 1px 宽，背景颜色rgba(255,255,255,0.2)高度50%， top 25%
+
+            li{
+                // 子绝父相，after相当于一个盒子定位于右侧
+                position: relative;
+                flex: 1;
+                line-height: 1rem;
+                font-size: .875rem;
+                color: #ffeb7b;
+                text-align: center;
+                list-style: none;
+                //声明字体
+                @font-face {
+                    font-family: electronicFont;
+                    src: url(../font/DS-DIGIT.TTF);
+                }
+                font-family: "electronicFont";
+                   &::after{
+                  
+                    content: " ";
+                    position: absolute;
+                    right: 0;
+                    height: 50%;
+                    width: 1px;
+                    top: 25%;
+                    background: rgba(255,255,255,0.2);
+                }
+            
+            }
+         }
+
+
+     }
+     //no-bd制作,里面两个小li 高度为40px,文字颜色为rgba(255,255,255,0.7)文字大小18px,上内边距为10px
+     .no-bd{
+         ul{
+           display: flex;
+           li{
+               flex: 1;
+               text-align: center;
+               color: rgba(255, 255, 255, 0.7);
+               font-size: .225rem;
+               height: .5rem;
+               line-height: .5rem;
+               padding-top: .125rem;
+           }
+         }
+     }
+}
+
+//中间第二个盒子map 高760px,长857px
+.map {
+    position: relative;
+    height: 9.5rem;
+    width: 10.7125rem;
+    // background-color: pink;
+    .map1 {
+        width: 10.7125rem;
+        height: 4.75rem;
+    }
+    img {
+     width:10.7125rem ;
+    } 
+    .countdown1 {
+        line-height: .9375rem;
+        color: rgba(255,255, 255, 0.7);
+        font-size: .3125rem;
+        text-align: center;
+    }
+    .countdown3 {
+        line-height: .9375rem;
+        color: rgba(255,255, 255, 0.7);
+        font-size: .3125rem;
+        text-align: center;
+    }
+    .countdown2 {
+        width: 10.7125rem;
+        height: 4.75rem;
+        
+    }
+}
+
+
+
