@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>linux</title>
+      <link href="blog/linux/"/>
+      <url>blog/linux/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>1.命令问题</p><ul><li>1.<a href="https://www.jianshu.com/p/06f8b31a90e6">Linux sed在某一行前面、后面追加</a></li></ul><p>2.源码</p><ul><li>1.<a href="https://1541812541.github.io/linux-ros">ros自动创建文件脚本</a></li></ul>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>工具</title>
       <link href="blog/tools/"/>
       <url>blog/tools/</url>

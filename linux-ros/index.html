@@ -1,0 +1,309 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>linux/ros | 晓</title><meta name="keywords" content="晓氏集团"><meta name="author" content="one by one"><meta name="copyright" content="one by one"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="!&#x2F;bin&#x2F;bashecho “欢迎使用ros,创建文件开始，请按照操作输入”echo “请输入工作空间名字”read catkin_wsif test -d ~&#x2F;$catkin_wsthen    echo “已经存在！！正在进入该工作空间”else  #先切回主目录 $cd ~&#x2F; 新建工作空间文件夹mkdir $catkin_ws 在 catkin_ws 目录下新建 src 文件夹cd $ca">
+<meta property="og:type" content="website">
+<meta property="og:title" content="linux&#x2F;ros">
+<meta property="og:url" content="https://1541812541.github.io/linux-ros/index.html">
+<meta property="og:site_name" content="晓">
+<meta property="og:description" content="!&#x2F;bin&#x2F;bashecho “欢迎使用ros,创建文件开始，请按照操作输入”echo “请输入工作空间名字”read catkin_wsif test -d ~&#x2F;$catkin_wsthen    echo “已经存在！！正在进入该工作空间”else  #先切回主目录 $cd ~&#x2F; 新建工作空间文件夹mkdir $catkin_ws 在 catkin_ws 目录下新建 src 文件夹cd $ca">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://1541812541.github.io/media/top_img.jpg">
+<meta property="article:published_time" content="2022-06-30T10:17:27.000Z">
+<meta property="article:modified_time" content="2022-06-30T10:19:57.536Z">
+<meta property="article:author" content="one by one">
+<meta property="article:tag" content="晓氏集团">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://1541812541.github.io/media/top_img.jpg"><link rel="shortcut icon" href="/media/2.jpg"><link rel="canonical" href="https://1541812541.github.io/linux-ros/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'linux/ros',
+  isPost: false,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: false,
+  postUpdate: '2022-06-30 18:19:57'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/1.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-work"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-myimage"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note/"><i class="fa-fw fas fa-note"></i><span> 笔记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/media/top_img.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晓</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-work"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-myimage"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note/"><i class="fa-fw fas fa-note"></i><span> 笔记</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">linux/ros</h1></div></header><main class="layout" id="content-inner"><div id="page"><div id="article-container"><h1 id="bin-bash"><a href="#bin-bash" class="headerlink" title="!/bin/bash"></a>!/bin/bash</h1><p>echo “欢迎使用ros,创建文件开始，请按照操作输入”<br>echo “请输入工作空间名字”<br>read catkin_ws<br>if test -d ~/$catkin_ws<br>then<br>    echo “已经存在！！正在进入该工作空间”<br>else </p>
+<pre><code>#先切回主目录
+</code></pre><p>$cd ~/</p>
+<h1 id="新建工作空间文件夹"><a href="#新建工作空间文件夹" class="headerlink" title="新建工作空间文件夹"></a>新建工作空间文件夹</h1><p>mkdir $catkin_ws</p>
+<h1 id="在-catkin-ws-目录下新建-src-文件夹"><a href="#在-catkin-ws-目录下新建-src-文件夹" class="headerlink" title="在 catkin_ws 目录下新建 src 文件夹"></a>在 catkin_ws 目录下新建 src 文件夹</h1><p>cd $catkin_ws<br>mkdir src</p>
+<h1 id="初始化-src-目录，生成的-CMakeLists-txt-为功能包编译配置"><a href="#初始化-src-目录，生成的-CMakeLists-txt-为功能包编译配置" class="headerlink" title="初始化 src 目录，生成的 CMakeLists.txt 为功能包编译配置"></a>初始化 src 目录，生成的 CMakeLists.txt 为功能包编译配置</h1><p>cd src<br>catkin_init_workspace</p>
+<h1 id="切回-catkin-ws-目录，对该工作空间执行一次编译"><a href="#切回-catkin-ws-目录，对该工作空间执行一次编译" class="headerlink" title="切回 catkin_ws 目录，对该工作空间执行一次编译"></a>切回 catkin_ws 目录，对该工作空间执行一次编译</h1><p>cd ~/$catkin_ws<br>catkin_make</p>
+<h1 id="环境变量配置，使新建的-catkin-ws-工作空间可用"><a href="#环境变量配置，使新建的-catkin-ws-工作空间可用" class="headerlink" title="环境变量配置，使新建的 catkin_ws 工作空间可用"></a>环境变量配置，使新建的 catkin_ws 工作空间可用</h1><p>source devel/setup.bash<br>fi<br>echo “请输入功能包名:”<br>read package<br>if test -d ~/$catkin_ws/src/$package<br>then<br>        echo “已经存在！！正在进入”<br>else<br> cd ~/$catkin_ws/src/<br> catkin_create_pkg $package roscpp std_msgs<br>  cd ~/$catkin_ws/<br> catkin_make -DCATKIN_WHITELIST_PACKAGES=”$package”<br>fi</p>
+<p>echo “是否建立节点或者对节点操作(y/n):”<br>read n<br>if [ $n == n ]<br>   then<br>           echo “已跳过建立节点！！”<br>       else echo “请输入创建或者操作的节点名字”</p>
+<p>read node<br>   if test -e ~/$catkin_ws/src/$package/src/$node.cpp<br>then<br>        echo “$node已经存在！！正在进入”</p>
+<p> else<br>      cd ~/$catkin_ws/src/$package/src/<br>      touch $node.cpp<br>      cat &gt;&gt;$node.cpp&lt;&lt;EOF<br>  main(){<br>  }<br>EOF</p>
+<p>echo “正在为您声明可执行文件……..”</p>
+<p>  cd ~/$catkin_ws/src/$package/<br>  cat &gt;&gt;CMakeLists.txt&lt;&lt;EOF<br>  add_executable($node src/$node.cpp)<br>  target_link_libraries($node ${catkin_LIBRARIES})<br>EOF<br>echo “您的节点名即为可执行文件名”<br>echo “可执行文件创立成功!!!”<br>fi<br>fi<br>echo “是否建立服务或者为节点关联服务(y/n):”<br>read s<br>if [ $s == n ]<br>   then<br>          echo “已跳过建立服务或者为节点关联服务！！”<br>   else<br>       echo “请输入服务名(文件名字)：”<br>       read srv</p>
+<p>if test -d ~/$catkin_ws/src/$package/srv<br>then<br>        echo “srv已经存在！！正在进入”<br>else cd ~/$catkin_ws/src/$package/<br>            mkdir srv<br>         cd ~/$catkin_ws/src/$package/<br>             var1=<code>sed -n &#39;/std_msgs/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var1”a\message_generation” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>var2=<code>sed -n &#39;/Generate services/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var2”a\add_service_files(\nFILES\n#Service2.srv\n)” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt</p>
+<p>var4=<code>sed -n &#39;/Generate added messages/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var4”a\generate_messages(\nDEPENDENCIES\nstd_msgs\n)” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>var5=<code>sed -n &#39;/&lt;doc_depend&gt;doxygen/=&#39; package.xml |sed -n &quot;1&quot;p</code><br>sed -e””$var5”a\<build_depend>message_generation</build_depend>\n<build_export_depend>message_generation</build_export_depend>\n<exec_depend>message_runtime</exec_depend>\n” package.xml &gt; tmpFile<br>mv tmpFile package.xml</p>
+<pre><code>fi    
+</code></pre><p>   if test -e ~/$catkin_ws/src/$package/srv/$srv.srv<br>then<br>        echo “$srv.srv已经存在！！正在进入”</p>
+<p> else</p>
+<pre><code>         cd ~/$catkin_ws/src/$package/srv
+     touch $srv.srv
+     echo &quot;文件创立完毕，准备添加依赖项......&quot;
+ cd ~/$catkin_ws/src/$package/
+
+        cd ~/$catkin_ws/src/$package/
+</code></pre><h1 id="注意，是用单引号包含双引号来引用变量。"><a href="#注意，是用单引号包含双引号来引用变量。" class="headerlink" title="注意，是用单引号包含双引号来引用变量。"></a>注意，是用单引号包含双引号来引用变量。</h1><p>var3=<code>sed -n &#39;/Service2.srv/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e ‘’”${var3}”‘a\’”${srv}”‘.srv’ CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt</p>
+<p>fi<br>fi</p>
+<p>echo “！！！提示请不要在cpp文件没写main时编译(使用本脚本创立的节点忽略)”</p>
+<p>echo “是否建立消息文件或者为节点关联消息(y/n)”<br>read m<br>if [ $m == n ]<br>   then<br>           echo “已跳过建立消息文件或者为节点关联消息！！”<br>   else<br>           if test -d ~/$catkin_ws/src/$package/msg<br>then<br>        echo “msg文件夹已经存在！！正在进入”<br>else<br>     var6=<code>sed -n &#39;/Generate messages/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var6”a\add_message_files(\nFILES\n#Message2.msg\n)” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt</p>
+<pre><code>cd ~/$catkin_ws/src/$package/
+        mkdir msg
+</code></pre><p>   fi<br>        echo “请输入消息名(文件名字)：”<br>           read msg</p>
+<p>cd ~/$catkin_ws/src/$package/msg<br>           if test -e ~/$catkin_ws/src/$package/msg/$msg.msg<br>       then echo “该msg文件已存在，准备为您关联节点”<br>       else</p>
+<pre><code>      touch $msg.msg
+        cat &gt;&gt;$msg.msg&lt;&lt;EOF
+</code></pre><p>int32 A<br>int32 B<br>int32 C<br>EOF</p>
+<p>cd ~/$catkin_ws/src/$package/</p>
+<p>if test -d ~/$catkin_ws/src/$package/srv</p>
+<p>   then<br>  var7=<code>sed -n &#39;/Message2.msg/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e ‘’”${var7}”‘a\’”${msg}”‘.msg’ CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>else</p>
+<p>var8=<code>sed -n &#39;/&lt;doc_depend&gt;doxygen/=&#39; package.xml |sed -n &quot;1&quot;p</code><br>sed -e””$var8”a\<build_depend>message_generation</build_depend>\n<exec_depend>message_runtime</exec_depend>\n” package.xml &gt; tmpFile<br>mv tmpFile package.xml<br> var9=<code>sed -n &#39;/std_msgs/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var9”a\message_generation” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>var10=<code>sed -n &#39;/Message2.msg/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e ‘’”${var10}”‘a\’”${msg}”‘.msg’ CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>var11=<code>sed -n &#39;/Generate added messages/=&#39; CMakeLists.txt |sed -n &quot;1&quot;p</code><br>sed -e “”$var11”a\generate_messages(\nDEPENDENCIES\nstd_msgs\n)” CMakeLists.txt &gt; tmpFile<br>mv tmpFile CMakeLists.txt<br>fi<br>fi<br>fi<br>echo “是否建立为您建立launch文件或者为节点关联launch文件(y/n)”<br>read L<br>if [ $L == n ]<br>   then<br>           echo “已跳过建立launch文件或者为节点关联launch文件！！”<br>   else<br>        echo “launch文件的内容默认为您追加”<br>        echo “输入使用的launch文件名(通常与当前位置包名一致)”<br>        read launch<br>        echo “请输入发布的节点”<br>        read node1<br>        echo “请输入发布节点的包名”<br>        read package1<br>        cd ~/$catkin_ws/src/$package/<br>           if test -d ~/$catkin_ws/src/$package1/launch<br>then<br>        echo “launch文件夹已经存在！！正在进入”<br>else<br>         mkdir launch<br>fi </p>
+<p>cd ~/$catkin_ws/src/$package1/launch<br>if test -e ~/$catkin_ws/src/$package1/launch/$launch.launch<br>  then<br>         echo “该launch文件已经存在开始追加……”<br>  else<br>      cd ~/$catkin_ws/src/$package1/launch/<br>       touch “$launch”.launch</p>
+<p>   cd ~/$catkin_ws/src/$package1/launch/<br>    cat &gt;&gt;”$launch”.launch&lt;<EOF
+  <launch><br>&lt;/launch&gt;<br>EOF<br>fi<br>cd ~/$catkin_ws/src/$package1/launch/<br>var13=<code>sed -n &#39;/&lt;launch&gt;/=&#39; &quot;$launch&quot;.launch |sed -n &quot;1&quot;p</code><br>sed -e ‘’”$var13”‘a\<node name="'"$node1"'"pkg="'"$package1"'"type="'"$node1"'"/>‘ “$launch”.launch &gt; tmpFile<br>mv tmpFile “$launch”.launch<br>fi</p>
+<p>if [ $n == n ]</p>
+<p>then echo “依赖项添加完毕！！”</p>
+<p>else</p>
+<p>if test -e ~/$catkin_ws/src/$package/srv/$*srv<br>then<br>        cd ~/$catkin_ws/src/$package/</p>
+<pre><code>  cat &gt;&gt;CMakeLists.txt&lt;&lt;EOF
+</code></pre><p>  add_dependencies($node ${package}_gencpp)<br>EOF<br>else<br>   if test -e ~/$catkin_ws/src/$package/msg/$msg*msg</p>
+<p>then<br> cd ~/$catkin_ws/src/$package/</p>
+<pre><code>  cat &gt;&gt;CMakeLists.txt&lt;&lt;EOF
+</code></pre><p>  add_dependencies($node ${package}_gencpp)<br>EOF</p>
+<p>fi<br>echo “依赖项添加完毕！！”<br>fi<br>fi</p>
+<h1 id="rm-rf-‘“-launch”‘-launch"><a href="#rm-rf-‘“-launch”‘-launch" class="headerlink" title="rm -rf ‘“$launch”‘.launch"></a>rm -rf ‘“$launch”‘.launch</h1><p>cd ~/$catkin_ws/<br> catkin_make -DCATKIN_WHITELIST_PACKAGES=”$package”<br> echo “依赖项添加完毕！！”<br>echo “编译完毕！！”</p>
+</div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/1.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">one by one</div><div class="author-info__description">存放个人信息</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/guguliu"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:你的邮箱" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/linux/" title="linux"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux"/></a><div class="content"><a class="title" href="/blog/linux/" title="linux">linux</a><time datetime="2022-06-30T10:05:15.000Z" title="发表于 2022-06-30 18:05:15">2022-06-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/tools/" title="工具"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工具"/></a><div class="content"><a class="title" href="/blog/tools/" title="工具">工具</a><time datetime="2022-05-24T04:57:29.000Z" title="发表于 2022-05-24 12:57:29">2022-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/videos/" title="视频网址"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="视频网址"/></a><div class="content"><a class="title" href="/blog/videos/" title="视频网址">视频网址</a><time datetime="2022-05-24T04:18:29.000Z" title="发表于 2022-05-24 12:18:29">2022-05-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/done/" title="测试页面"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="测试页面"/></a><div class="content"><a class="title" href="/blog/done/" title="测试页面">测试页面</a><time datetime="2021-09-16T11:43:06.000Z" title="发表于 2021-09-16 19:43:06">2021-09-16</time></div></div></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/06/"><span class="card-archive-list-date">六月 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/05/"><span class="card-archive-list-date">五月 2022</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/09/"><span class="card-archive-list-date">九月 2021</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">4</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2020-09-09T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">153</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-06-30T10:24:43.432Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By one by one</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script></div><div class="aplayer no-destroy" data-id="7675104902" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/wanko.model.json"},"display":{"position":"left","width":100,"height":150,"hOffset":-10,"vOffset":40},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
