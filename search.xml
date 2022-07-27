@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>vrep小车</title>
+      <link href="blog/vrep%E5%B0%8F%E8%BD%A6/"/>
+      <url>blog/vrep%E5%B0%8F%E8%BD%A6/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="建立车的本体"><a href="#建立车的本体" class="headerlink" title="建立车的本体"></a>建立车的本体</h1><p> 1 点击 add -&gt;primitive shape-&gt;cuboid（长方体）<br> 2 设置长宽高0.2，0.3，0.1（x-0.2,y-0.3,z-0.1）<br> 3 本体上升0.1：<br><img src="https://s1.ax1x.com/2022/07/27/vSLEPU.png" alt=""><br>translation-&gt;z:0.1</p><h1 id="建立车轮1"><a href="#建立车轮1" class="headerlink" title="建立车轮1"></a>建立车轮1</h1><p> 1 点击 add -&gt;primitive shape-&gt;cylinder（圆柱）<br> 2 设置直径0.05，高度0.05（x-0.05,z-0.05）<br> 3 车轮转正：相对于世界x转90度<br><img src="https://s1.ax1x.com/2022/07/27/vSOmY8.png" alt=""><br>rotation-&gt;x-&gt;90<br> 4 将车轮移到正确位置：相对于世界坐标(x-0.13,y-0.1)<br><img src="https://s1.ax1x.com/2022/07/27/vSLEPU.png" alt=""><br>position-&gt;</p><h1 id="给车轮1添加转动关节1"><a href="#给车轮1添加转动关节1" class="headerlink" title="给车轮1添加转动关节1"></a>给车轮1添加转动关节1</h1><p> 1 点击 add -&gt;joint-&gt;revolute<br> 2 关节转正：相对于世界x转90度<br><img src="https://s1.ax1x.com/2022/07/27/vSOmY8.png" alt=""><br>rotation-&gt;x-&gt;90</p><h1 id="车轮1装在转动关节1上"><a href="#车轮1装在转动关节1上" class="headerlink" title="车轮1装在转动关节1上"></a>车轮1装在转动关节1上</h1><p> 1 按住ctrl 选中关节1和车轮1,将车轮1拖到转动关节1上</p><h1 id="给关节使能电动"><a href="#给关节使能电动" class="headerlink" title="给关节使能电动"></a>给关节使能电动</h1><p> 1 点击转动关节1-&gt;最下方 show dynamic-&gt;motor enabled勾选<br> 2 设置转动关节不可见：点击转动关节1-&gt;common-&gt;camera visibility laye-&gt;去掉勾选</p><h1 id="转动关节1装在小车上"><a href="#转动关节1装在小车上" class="headerlink" title="转动关节1装在小车上"></a>转动关节1装在小车上</h1><h1 id="复制四份车轮1，转动关节1"><a href="#复制四份车轮1，转动关节1" class="headerlink" title="复制四份车轮1，转动关节1"></a>复制四份车轮1，转动关节1</h1><p> 1 按住ctrl 选中关节1和车轮1,右键edit-&gt;copy,点击小车附近右键edit-&gt;paste</p><h1 id="调整其余四个车轮位置，并装在车上"><a href="#调整其余四个车轮位置，并装在车上" class="headerlink" title="调整其余四个车轮位置，并装在车上"></a>调整其余四个车轮位置，并装在车上</h1>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>qt-安卓</title>
       <link href="blog/qt-%E5%AE%89%E5%8D%93/"/>
       <url>blog/qt-%E5%AE%89%E5%8D%93/</url>
