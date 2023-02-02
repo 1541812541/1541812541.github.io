@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>slam功能包详解</title>
+      <link href="blog/slam%E5%8A%9F%E8%83%BD%E5%8C%85%E8%AF%A6%E8%A7%A3/"/>
+      <url>blog/slam%E5%8A%9F%E8%83%BD%E5%8C%85%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><div class="tabs" id="test4"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test4-1">简介</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test4-1"><details class="folding-tag" green><summary> 简介 </summary>              <div class='content'>              </div>            </details><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 毕业设计 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>ros编程入门</title>
       <link href="blog/ros%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/"/>
       <url>blog/ros%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8/</url>
