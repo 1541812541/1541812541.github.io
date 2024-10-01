@@ -1,0 +1,1053 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>深度学习基础 | 晓</title><meta name="keywords" content="晓氏集团"><meta name="author" content="one by one"><meta name="copyright" content="one by one"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="理论上理论下常用函数 最简单的神经网络-Relu                                                              逻辑回归-二元分类算法                                                              损失函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习基础">
+<meta property="og:url" content="http://154181.xyz/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="晓">
+<meta property="og:description" content="理论上理论下常用函数 最简单的神经网络-Relu                                                              逻辑回归-二元分类算法                                                              损失函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://154181.xyz/media/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80.webp">
+<meta property="article:published_time" content="2024-08-15T01:55:04.000Z">
+<meta property="article:modified_time" content="2024-10-01T01:53:18.116Z">
+<meta property="article:author" content="one by one">
+<meta property="article:tag" content="晓氏集团">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://154181.xyz/media/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80.webp"><link rel="shortcut icon" href="/media/2.jpg"><link rel="canonical" href="http://154181.xyz/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习基础',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2024-10-01 09:53:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.css" /><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">23</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/todolist"><span> 计划表</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-book"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-camera"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note"><i class="fa-fw fas fa-file-circle-check"></i><span> 笔记</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="http://985.so/bmx9r"><i class="fa-fw fas fa-headphones"></i><span> 夜听电脑版</span></a></li><li><a class="site-page child" href="/music-friends"><i class="fa-fw fas fa-headphones"></i><span> 音乐库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="http://985.so/mwb21"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/media/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晓</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/todolist"><span> 计划表</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-book"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-camera"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note"><i class="fa-fw fas fa-file-circle-check"></i><span> 笔记</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="http://985.so/bmx9r"><i class="fa-fw fas fa-headphones"></i><span> 夜听电脑版</span></a></li><li><a class="site-page child" href="/music-friends"><i class="fa-fw fas fa-headphones"></i><span> 音乐库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="http://985.so/mwb21"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">深度学习基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-08-15T01:55:04.000Z" title="发表于 2024-08-15 09:55:04">2024-08-15</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-10-01T01:53:18.116Z" title="更新于 2024-10-01 09:53:18">2024-10-01</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="深度学习基础"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout hide-aside" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="tabs" id="test4"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#test4-1">理论上</button></li><li class="tab"><button type="button" data-href="#test4-2">理论下</button></li><li class="tab"><button type="button" data-href="#test4-3">常用函数</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="test4-1"><details class="folding-tag" green><summary> 最简单的神经网络-Relu </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础01.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础02.webp"/></div></div>
+              </div>
+            </details>
+
+<details class="folding-tag" green><summary> 逻辑回归-二元分类算法 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 1 of 174.webp"/></div></div>
+              </div>
+            </details>
+
+<details class="folding-tag" green><summary> 损失函数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 2 of 174.webp"/></div></div>
+              </div>
+            </details>
+
+<details class="folding-tag" green><summary> 梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 3 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 单一样本的梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 4 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> m个样本的梯度下降(求w </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 5 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 向量化 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 6 of 174.webp"/></div></div><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">print(a)</span><br><span class="line">print(a.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算运行时长</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">a = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line">b = np.random.rand(<span class="number">1000000</span>)</span><br><span class="line">print(a.shape)</span><br><span class="line"><span class="comment"># 当前时间</span></span><br><span class="line">tic = time.time()</span><br><span class="line"><span class="comment"># 创建线性回归函数C=aᵀb</span></span><br><span class="line">c = np.dot(a,b)</span><br><span class="line"><span class="comment"># 当前时间</span></span><br><span class="line">toc = time.time()</span><br><span class="line"><span class="comment"># 计算运行时间：ms</span></span><br><span class="line">print(<span class="string">&quot;运行时间：&quot;</span> + <span class="built_in">str</span>(<span class="number">1000</span>*(toc-tic)) + <span class="string">&quot;ms&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">dw=np.zeros((<span class="number">5</span>,<span class="number">1</span>))</span><br><span class="line">print(dw)</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 向量化例子 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 7 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> python中的广播 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 8 of 174.webp"/></div></div><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">A = np.array([[<span class="number">56.0</span>,<span class="number">0.0</span>,<span class="number">4.4</span>,<span class="number">68.0</span>],</span><br><span class="line">              [<span class="number">1.2</span>,<span class="number">104.0</span>,<span class="number">52.0</span>,<span class="number">8.0</span>],</span><br><span class="line">              [<span class="number">1.8</span>,<span class="number">135.0</span>,<span class="number">99.0</span>,<span class="number">0.9</span>]</span><br><span class="line">    ])</span><br><span class="line">print(A)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按列求和</span></span><br><span class="line">cal = A.<span class="built_in">sum</span>(axis=<span class="number">0</span>)</span><br><span class="line">print(<span class="string">&quot;按列求和&quot;</span>)</span><br><span class="line">print(cal)</span><br><span class="line">print(cal.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment">#改变成一行四列</span></span><br><span class="line">cal = cal.reshape(<span class="number">1</span>,<span class="number">4</span>)</span><br><span class="line">print(cal)</span><br><span class="line">print(cal.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 矩阵每列都除不同的数算出百分比</span></span><br><span class="line">percentage = <span class="number">100</span>*A/cal</span><br><span class="line">print(percentage)</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> numpy向量 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 9 of 174.webp"/></div></div><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不建议的</span></span><br><span class="line"><span class="comment"># 产生五个随机数</span></span><br><span class="line">print(<span class="string">&quot;********不建议（5,）*******&quot;</span>)</span><br><span class="line">a = np.random.rand(<span class="number">5</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="comment"># (5,)代表这是数组，不是向量，秩为1</span></span><br><span class="line">print(a.shape)</span><br><span class="line"><span class="comment"># 转置后没变</span></span><br><span class="line">print(a.T)</span><br><span class="line"><span class="comment"># 内积 因为是数组所以结果不是矩阵</span></span><br><span class="line">print(np.dot(a.T,a))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建议 不要使用（N,）类型使用（N，M）</span></span><br><span class="line">print(<span class="string">&quot;********不建议（5,1）*******&quot;</span>)</span><br><span class="line">a = np.random.rand(<span class="number">5</span>,<span class="number">1</span>)</span><br><span class="line">print(a)</span><br><span class="line"><span class="comment"># 转置</span></span><br><span class="line">print(a.T)</span><br><span class="line"><span class="comment"># 内积</span></span><br><span class="line">print(<span class="string">&quot;内积：&quot;</span>)</span><br><span class="line">print(np.dot(a,a.T))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果出现（5，）类型用reshape</span></span><br><span class="line"><span class="comment"># 解决办法 reshape</span></span><br><span class="line">print(<span class="string">&quot;解决办法 reshape&quot;</span>)</span><br><span class="line">a = np.random.rand(<span class="number">5</span>)</span><br><span class="line">a = a.reshape((<span class="number">5</span>,<span class="number">1</span>))</span><br><span class="line">print(a)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 神经网络的表现形式 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 10 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 计算神经网络的输出 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 11 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 多样本向量化 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 12 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 向量化实现的解释 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 13 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 激活函数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 14 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么使用非线性激活函数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 15 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 神经网络的梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 16 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 17 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深层神经网络 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 18 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深层网络的正向传播 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 19 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 正确的矩阵维数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 20 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 21 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为深层神经神经网络构建模块 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 22 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 参数和超参数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 23 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 训练 开发 测试集 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 24 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 偏差和方差 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 25 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 机器学习的基本配方 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 26 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 正则化方法一 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 27 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么正则化可以减少过拟合 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 28 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 正则化方法二(抛弃--dropout) 随机失活 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 29 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 30 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 理解dropout </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 31 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 正则化方法三(数据扩增) --防止过拟合 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 32 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 归一化输入(加速训练过程) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 33 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 34 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 梯度消失和爆炸 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 35 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深层网络权值初始化 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 36 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 梯度的数值近似 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 37 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 梯度检验 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 38 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 梯度检查注意事项 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 39 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 小批量梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 40 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 理解小批量梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 41 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 42 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 指数加权平均(构建优化算法) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 43 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 理解指数加权平均 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 44 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 动量梯度下降 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 45 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> RMSPROP(均方根传递) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 46 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Adam优化算法(梯度算法优化) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 47 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 48 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 学习速率衰减(刚开始训练步长大一些，之后步长小一些) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 49 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 50 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 参数调整过程 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 51 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 用适当的标准选择超参数 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 52 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 53 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> batch normalization 批量归一化 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 54 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 将batch norm 添加到神经网络 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 55 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 56 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么Batch Norm有效 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 57 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 测试时的Batch Norm </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 58 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Softmax回归 （作为激活函数使用） </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 59 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 60 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 训练一个softmax分类器 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 61 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 62 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深度学习框架 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 63 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深度学习框架--TensorFlow </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 64 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 65 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 正交化 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 66 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 单一的量化评估指标 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 67 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 68 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 满足和优化指标 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 69 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 设置训练、开发、测试集 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 70 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 开发集和训练集的大小和指标 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 71 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深度学习与人类指标 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 72 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 可避免的偏差 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 73 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 理解人类水平表现 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 74 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 超越人类水平表现 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 75 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 提高模型性能 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 76 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 进行误差分析 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 77 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 训练集和测试集的不同分布 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 78 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 79 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 不匹配数据分布的偏差和方差 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 80 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 81 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 解决数据不匹配问题 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 82 of 174.webp"/></div></div>
+              </div>
+            </details><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-2"><details class="folding-tag" green><summary> 迁移学习 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 83 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 84 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 多任务学习 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 85 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 86 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 什么是端到端深度学习 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 87 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 边缘检测(CNN) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 88 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 填充(padding) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 89 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 卷积步长-stride </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 90 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 三维卷积 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 91 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 卷积网络的一层 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 92 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 93 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深度卷积神经网络（多层） </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 94 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 池化层 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 95 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 96 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> CNN示例 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 97 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 98 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么用卷积 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 99 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 经典网络模型 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 100 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 101 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 残差网络 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 102 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么使用残差网络 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 103 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 1*1卷积(Network in Network) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 104 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> inception模型 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 105 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> inception network </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 106 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Mobile Net (深度可分离卷积) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 107 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 108 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Mobile Net架构（改进） </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 109 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 高效网络(Efficient Net) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 110 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 使用开源代码 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 111 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 迁移学习(对已经训练好的网络迁移) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 112 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 数据增强(扩充自己的数据) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 113 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 目标定位 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 114 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 地标检测--Landmark detection(特征点检测) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 115 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 目标检测 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 116 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 在卷积网络上实现滑动窗口 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 117 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 边界框预测(YOLO) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 118 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 交并比(IOU)评价目标检测算法 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 119 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 非极大值抑制 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 120 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 锚框(anchor box) 一个网格单元检测多个对象 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 121 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 122 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> YOLO算法 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 123 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> u-net进行语义分割 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 124 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 转置卷积 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 125 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 126 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> u-net结构 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 127 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 单样本学习 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 128 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 129 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 孪生神经网络(Siamese network) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 130 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 三元组损失(triplet loss) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 131 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 132 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 人脸验证和二进制分类 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 133 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 卷积在一维和三维的推广 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 134 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 为什么用序列模型 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 135 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 序列模型会用到的符号 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 136 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 循环神经网络模型(RNN) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 137 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 138 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> RNN的反向传播 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 139 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 不同类型的RNN(Tx不等于Ty) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 140 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> RNN构建语言模型 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 141 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 142 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 对新序列的采样 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 143 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> RNN的梯度消失 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 144 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> GRU单元(门控循环单元)使RNN更擅长长距离连接 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 145 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 146 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> LSTM(长短期记忆)解决长期记忆和短期记忆 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 147 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 双向RNN </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 148 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 深度RNN </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 149 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 词表示(word representation) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 150 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 151 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 使用词嵌入 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 152 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 词嵌入的性能 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 153 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 154 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 矩阵嵌入(Embedding matrix) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 155 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 156 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 157 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Negative sampling(负采样) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 158 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 159 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 情感分类(sentiment classification) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 160 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 161 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 词嵌入消除偏见(种族、性别) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 162 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 选择最有可能的句子 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 163 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 164 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 注意力模型引入 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 165 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 注意力模型(Attention model) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 166 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 167 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Transformer 引言 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 168 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 自注意力机制(self-Attention) </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 169 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 170 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> 多头注意力机制 </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 171 of 174.webp"/></div></div>
+              </div>
+            </details>
+<details class="folding-tag" green><summary> Transformer </summary>
+              <div class='content'>
+              <div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 172 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 173 of 174.webp"/></div></div><div class="img-wrap"><div class="img-bg"><img class="img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/深度学习基础/深度学习基础 174 of 174.webp"/></div></div>
+              </div>
+            </details><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="test4-3"><details class="folding-tag" green><summary> 帮助 </summary>
+              <div class='content'>
+
+              </div>
+            </details><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/media/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/GNN/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/GNN.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">GNN</div></div></a></div></nav></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By one by one</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script></div><script defer src="/js/light.js"></script><script async data-pjax src="/js/randombg.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(/media/roll01.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/qt/&quot;);" href="javascript:void(0);">qt</a><span class="categoryBar-list-count">3</span><span class="categoryBar-list-descr">详情点击</span></li><li class="categoryBar-list-item" style="background:url(/media/roll02.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/linux/&quot;);" href="javascript:void(0);">linux</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">详情点击</span></li><li class="categoryBar-list-item" style="background:url(/media/roll03.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/毕业设计/&quot;);" href="javascript:void(0);">毕业设计</a><span class="categoryBar-list-count">5</span><span class="categoryBar-list-descr">详情点击</span></li><li class="categoryBar-list-item" style="background:url(/media/roll04.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/工具/&quot;);" href="javascript:void(0);">工具</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">详情点击</span></li><li class="categoryBar-list-item" style="background:url(/media/roll05.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/视频/&quot;);" href="javascript:void(0);">视频</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr">详情点击</span></li><li class="categoryBar-list-item" style="background:url(/media/roll06.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/实训/&quot;);" href="javascript:void(0);">实训</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">详情点击</span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_clock_anzhiyu_injector_config(){
+    var parent_div_git = document.getElementsByClassName('sticky_layout')[0];
+    var item_html = '<div class="card-widget card-clock"><div class="card-glass"><div class="card-background"><div class="card-content"><div id="hexo_electric_clock"><img class="entered loading" id="card-clock-loading" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/loading.gif" style="height: 120px; width: 100%;" data-ll-status="loading"/></div></div></div></div></div>';
+    console.log('已挂载butterfly_clock_anzhiyu')
+    if(parent_div_git) {
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var qweather_key = '45b78a857b7d4cb2b7841d352f582a80';
+  var gaud_map_key = 'edce72c06fcf68f3406d2ecb75d329e0';
+  var baidu_ak_key = 'undefined';
+  var flag = 0;
+  var clock_rectangle = '113.34532,23.15624';
+  var clock_default_rectangle_enable = 'false';
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_clock_anzhiyu_injector_config();
+  }
+  </script><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script data-pjax src="https://cdn.cbd.int/hexo-butterfly-clock-anzhiyu/lib/clock.min.js"></script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://www.fomal.cc/static/js/runtime.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/工具.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt="">工具</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/视频网址.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt="">视频网址</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/工具.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-06-30</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt="">linux</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/roll02.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-23</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt="">UDP</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/STM32避障小车.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-01-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt="">STM32避障小车</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__bounceInLeft');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__bounceInRight');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('pagination');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__rotateInDownLeft');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><!-- hexo injector body_end end --><script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/wanko.model.json"},"display":{"position":"left","width":100,"height":150,"hOffset":-10,"vOffset":40},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
