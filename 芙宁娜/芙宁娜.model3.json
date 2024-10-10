@@ -1,0 +1,1 @@
+{"Version":3,"FileReferences":{"Moc":"芙宁娜.moc3","Textures":["芙宁娜.8192/texture_00.png"],"Physics":"芙宁娜.physics3.json","DisplayInfo":"芙宁娜.cdi3.json"},"Groups":[{"Target":"Parameter","Name":"LipSync","Ids":["ParamMouthForm","ParamMouthOpenY"]},{"Target":"Parameter","Name":"EyeBlink","Ids":[]}]}
