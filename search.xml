@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>魔改hexo</title>
+      <link href="blog/%E9%AD%94%E6%94%B9hexo/"/>
+      <url>blog/%E9%AD%94%E6%94%B9hexo/</url>
+      
+        <content type="html"><![CDATA[<script src="/assets/js/DPlayer.min.js"> </script><link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>加载moc3文件<br><a href="https://oml2d.com/guide/hexo.html">https://oml2d.com/guide/hexo.html</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C++基础</title>
       <link href="blog/C-%E5%9F%BA%E7%A1%80/"/>
       <url>blog/C-%E5%9F%BA%E7%A1%80/</url>
