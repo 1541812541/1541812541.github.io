@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>食谱库</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="page-bg"></div>
+
+  <header class="site-header">
+    <div class="brand-text">食谱库</div>
+
+    <nav class="nav-pill">
+      <a href="#" class="nav-item active" data-page="discover">发现食谱</a>
+      <a href="#" class="nav-item" data-page="recommend">智能推荐</a>
+      <a href="#" class="nav-item" data-page="favorite">收藏</a>
+    </nav>
+
+    <div class="header-actions">
+      <div class="header-search">
+        <span class="search-icon">⌕</span>
+        <input type="text" placeholder="搜索食谱、食材..." id="globalSearch" />
+        <span class="shortcut">⌘K</span>
+      </div>
+
+      <button class="user-dot" aria-label="用户中心"></button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <span>📌</span>
+        <h2>快速筛选</h2>
+      </div>
+
+      <section class="filter-group">
+        <div class="filter-head">
+          <h3>分类</h3>
+          <span>⌃</span>
+        </div>
+        <div class="chip-list" id="categoryFilters"></div>
+      </section>
+
+      <section class="filter-group">
+        <div class="filter-head">
+          <h3>口味</h3>
+          <span>⌃</span>
+        </div>
+        <div class="chip-list" id="tasteFilters"></div>
+      </section>
+
+      <section class="filter-group">
+        <div class="filter-head">
+          <h3>食材 <small>我已有的</small></h3>
+          <span>⌃</span>
+        </div>
+        <div class="chip-list" id="ingredientFilters"></div>
+      </section>
+
+      <section class="filter-group">
+        <button class="reset-btn" id="resetBtn">清空筛选</button>
+      </section>
+    </aside>
+
+    <section class="content">
+      <div class="content-head">
+        <div>
+          <h1 id="pageTitle">智能食材搜索</h1>
+          <p id="pageDesc">输入已有食材，系统会自动推荐最接近的菜谱。</p>
+        </div>
+
+        <button class="mode-btn" id="sortBtn">
+          智能排序
+          <span>⌄</span>
+        </button>
+      </div>
+
+      <div class="ingredient-search">
+        <input
+          type="text"
+          id="ingredientInput"
+          placeholder="输入我已有的食材，例如：鸡蛋、面粉、猪肉..."
+        />
+        <button id="addIngredientBtn">＋</button>
+      </div>
+
+      <div class="selected-tags" id="selectedTags">
+        <button class="tag active">全部</button>
+      </div>
+
+      <div class="recipe-grid" id="recipeGrid"></div>
+
+      <div class="empty-state" id="emptyState">
+        <h3>没有找到匹配的食谱</h3>
+        <p>可以减少筛选条件，或者换一个食材试试。</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- 菜谱详情弹窗 -->
+  <div class="detail-modal" id="detailModal">
+    <div class="detail-mask" id="detailMask"></div>
+
+    <article class="detail-panel">
+      <button class="detail-close" id="detailClose">×</button>
+
+      <div class="detail-cover">
+        <img id="detailImage" src="" alt="" />
+      </div>
+
+      <div class="detail-body">
+        <div class="detail-top">
+          <div>
+            <h2 id="detailTitle"></h2>
+            <p id="detailSubtitle"></p>
+          </div>
+
+          <button class="favorite-btn" id="favoriteBtn">♡ 收藏</button>
+        </div>
+
+        <div class="detail-meta" id="detailMeta"></div>
+
+        <section class="detail-section">
+          <h3>所需食材</h3>
+          <ul class="ingredient-list" id="detailIngredients"></ul>
+        </section>
+
+        <section class="detail-section">
+          <h3>制作步骤</h3>
+          <ol class="step-list" id="detailSteps"></ol>
+        </section>
+
+        <section class="detail-section">
+          <h3>小贴士</h3>
+          <p class="tips-text" id="detailTips"></p>
+        </section>
+      </div>
+    </article>
+  </div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>
