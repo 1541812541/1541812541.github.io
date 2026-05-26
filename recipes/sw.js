@@ -1,5 +1,5 @@
 // Cache name with version
-const CACHE_NAME = "recipes-v2";
+const CACHE_NAME = "recipes-v3";
 const ASSETS = [
   "./",
   "./index.html",
