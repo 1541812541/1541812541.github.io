@@ -496,4 +496,180 @@ newIngredient.addEventListener("keydown", event => {
   }
 });
 
+
+// ============================================================
+// ?????????? ? ??? images/ ? ?????
+// ============================================================
+const imageUpload = document.getElementById("imageUpload");
+const imageUploadBtn = document.getElementById("imageUploadBtn");
+
+
+// 拖拽图片到预览区
+window.handleImageDrop = function handleImageDrop(event) {
+  event.preventDefault();
+  const preview = document.getElementById("imagePreview");
+  preview.style.outline = "";
+
+  const file = event.dataTransfer.files[0];
+  if (!file || !file.type.startsWith("image/")) {
+    alert("请拖入图片文件（支持 JPG, PNG, GIF, WebP, SVG, AVIF 等格式）");
+    return;
+  }
+
+  // 模拟文件选择
+  const dt = new DataTransfer();
+  dt.items.add(file);
+  imageUpload.files = dt.files;
+
+  // 触发 change 事件
+  imageUpload.dispatchEvent(new Event("change", { bubbles: true }));
+
+  // 高亮拖拽区
+  preview.style.outline = "2px dashed rgba(98, 231, 255, 0.6)";
+  setTimeout(() => { preview.style.outline = ""; }, 1200);
+}
+
+imageUploadBtn.addEventListener("click", () => {
+  imageUpload.click();
+});
+
+imageUpload.addEventListener("change", async () => {
+  const file = imageUpload.files[0];
+  if (!file) return;
+
+  // Show preview immediately from the selected file
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    imagePreviewImg.src = e.target.result;
+    imagePreviewImg.style.display = "block";
+    imagePreviewHint.style.display = "none";
+  };
+  reader.readAsDataURL(file);
+
+  // Try to copy the file to the images/ folder
+  const targetPath = "./images/" + file.name;
+
+  try {
+    // Attempt File System Access API (Chrome/Edge)
+    if (window.showDirectoryPicker) {
+      // Try to get images folder handle
+      let dirHandle;
+      try {
+        dirHandle = await window.showDirectoryPicker({
+          mode: "readwrite",
+          startIn: "desktop"
+        });
+      } catch (e) {
+        // User canceled or API not available for targeted folder
+        throw e;
+      }
+
+      // Navigate to images folder if possible, or create it
+      try { dirHandle = await dirHandle.getDirectoryHandle("images", { create: true }); } catch (e) {}
+
+      const fileHandle = await dirHandle.getFileHandle(file.name, { create: true });
+      const writable = await fileHandle.createWritable();
+      await writable.write(file);
+      await writable.close();
+
+      imageInput.value = targetPath;
+      imagePreviewHint.style.display = "none";
+      console.log("Image saved to images/ folder:", file.name);
+    } else {
+      throw new Error("File System Access API not supported");
+    }
+  } catch (e) {
+    // Fallback: just set the path and tell user to copy manually
+    imageInput.value = targetPath;
+    imagePreviewHint.style.display = "block";
+    imagePreviewHint.textContent =
+      "? ?????????? " + file.name + " ??? images/ ???";
+    console.warn("Cannot auto-save to images/ folder. User needs to copy manually.", e.message || e);
+  }
+
+  // Reset file input so same file can be re-selected
+  imageUpload.value = "";
+});
+
+// ============================================================
+// ????? images/ ???
+// ============================================================
+function checkMissingImages() {
+  const imagePaths = [...new Set(appData.recipes.map((r) => r.image).filter(Boolean))];
+  if (imagePaths.length === 0) return [];
+
+  // We cannot truly check filesystem from browser JS.
+  // Instead, list all unique paths and let the user verify.
+  return imagePaths;
+}
+
+// Override saveToDataJs to include image checklist
+const _origSaveToDataJs = saveToDataJs;
+saveToDataJs = async function () {
+  const missing = checkMissingImages();
+  if (missing.length > 0) {
+    const msg =
+      "???????????? images/ ?????\n\n" +
+      missing.map((p) => "  ? " + p.replace("./images/", "")).join("\n") +
+      "\n\n??????? images/ ????????\n\n???????? data.js";
+    if (!confirm(msg)) return;
+  }
+  return _origSaveToDataJs();
+};
+
+// Override exportData similarly
+const _origExportData = exportData;
+exportData = function () {
+  const missing = checkMissingImages();
+  if (missing.length > 0) {
+    const msg =
+      "???????????? images/ ?????\n\n" +
+      missing.map((p) => "  ? " + p.replace("./images/", "")).join("\n") +
+      "\n\n??????? images/ ????????\n\n????????";
+    if (!confirm(msg)) return;
+  }
+  return _origExportData();
+};
+
+
+// ??????
+const imagePreviewImg = document.getElementById("imagePreviewImg");
+const imagePreviewHint = document.getElementById("imagePreviewHint");
+
+imageInput.addEventListener("input", () => {
+  const path = imageInput.value.trim();
+  if (!path) {
+    imagePreviewImg.style.display = "none";
+    imagePreviewHint.style.display = "block";
+    imagePreviewHint.textContent = "?????????";
+    return;
+  }
+
+  // Check common image formats
+  const ext = path.split(".").pop().toLowerCase();
+  const supportedFormats = ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp", "avif", "tiff", "ico"];
+  if (!supportedFormats.includes(ext)) {
+    imagePreviewImg.style.display = "none";
+    imagePreviewHint.style.display = "block";
+    imagePreviewHint.textContent = "??: " + ext.toUpperCase() + " (?? JPG/PNG/GIF/WebP/SVG/AVIF)";
+    return;
+  }
+
+  imagePreviewImg.src = path;
+  imagePreviewImg.style.display = "block";
+  imagePreviewHint.style.display = "none";
+});
+
+imagePreviewImg.addEventListener("error", () => {
+  imagePreviewImg.style.display = "none";
+  imagePreviewHint.style.display = "block";
+  imagePreviewHint.textContent = "? ????????????????";
+});
+
+imagePreviewImg.addEventListener("load", () => {
+  imagePreviewImg.style.display = "block";
+  imagePreviewHint.style.display = "none";
+});
+
+
 renderAll();

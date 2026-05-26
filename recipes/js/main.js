@@ -33,12 +33,14 @@ const detailSteps = document.getElementById("detailSteps");
 const detailTips = document.getElementById("detailTips");
 const favoriteBtn = document.getElementById("favoriteBtn");
 
-const fallbackImages = [
-  "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80",
-  "https://images.unsplash.com/photo-1528712306091-ed0763094c98?auto=format&fit=crop&w=900&q=80"
-];
+// Offline-safe SVG placeholder for missing images
+const PLACEHOLDER_SVG = "data:image/svg+xml," + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">'
+  + '<rect fill="%23222630" width="400" height="300" rx="16"/>'
+  + '<text fill="%23555a6e" font-family="system-ui,sans-serif" font-size="48" x="200" y="140" text-anchor="middle">??</text>'
+  + '<text fill="%2344485a" font-family="system-ui,sans-serif" font-size="14" x="200" y="178" text-anchor="middle">????</text>'
+  + '</svg>'
+);
 
 /**
  * 读取本地数据
@@ -260,7 +262,7 @@ function renderRecipes() {
         <img
           src="${recipe.image}"
           alt="${recipe.name}"
-          onerror="this.src='${fallbackImages[index % fallbackImages.length]}'"
+          onerror="this.onerror=null;this.src=PLACEHOLDER_SVG"
         />
 
         <span class="need-badge">
@@ -397,7 +399,7 @@ function openDetail(id) {
 
   detailImage.src = recipe.image;
   detailImage.onerror = () => {
-    detailImage.src = fallbackImages[0];
+    detailImage.src = PLACEHOLDER_SVG;
   };
 
   detailTitle.textContent = recipe.name;
@@ -509,7 +511,11 @@ ingredientInput.addEventListener("keydown", event => {
   }
 });
 
-globalSearch.addEventListener("input", renderRecipes);
+let searchDebounceTimer = null;
+globalSearch.addEventListener("input", () => {
+  clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(renderRecipes, 200);
+});
 
 resetBtn.addEventListener("click", clearAllFilters);
 

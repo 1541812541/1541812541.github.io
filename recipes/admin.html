@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>食谱后台管理</title>
+    <meta name="theme-color" content="#07090d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="食谱库" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="apple-touch-icon" href="./images/icon-192.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%3Crect%20width=%2232%22%20height=%2232%22%20rx=%226%22%20fill=%22%231a1d28%22/%3E%3Ctext%20x=%2216%22%20y=%2223%22%20text-anchor=%22middle%22%20font-size=%2220%22%3E??%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
@@ -40,9 +47,17 @@
             <input type="text" id="name" placeholder="例如：红烧肉" required />
           </label>
 
-          <label>
+                    <label>
             图片路径
-            <input type="text" id="image" placeholder="./images/hongshaorou.jpg" required />
+            <div class="img-path-row">
+              <input type="text" id="image" placeholder="./images/hongshaorou.jpg" required />
+              <input type="file" id="imageUpload" accept="image/*" style="display:none" />
+              <button type="button" class="upload-btn" id="imageUploadBtn" title="选择本地图片，自动复制到 images/ 文件夹">📁 选图</button>
+            </div>
+            <div class="image-preview" id="imagePreview" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleImageDrop(event)">
+              <img id="imagePreviewImg" src="" alt="预览" style="display:none" />
+              <span class="preview-hint" id="imagePreviewHint">输入路径后自动预览，或拖拽图片 / 点击「选图」上传</span>
+            </div>
           </label>
 
           <label>
@@ -143,5 +158,11 @@
 
   <script src="./js/data.js"></script>
   <script src="./js/admin.js"></script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js");
+    }
+  </script>
 </body>
 </html>
