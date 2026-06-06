@@ -1,5 +1,20 @@
 const STORAGE_KEY = "recipes_app_data";
 const FAVORITE_KEY = "recipes_favorites";
+const STORAGE_VERSION_KEY = STORAGE_KEY + "_version";
+
+function getCurrentDataVersion() {
+  return typeof DATA_VERSION === "string" ? DATA_VERSION : "dev";
+}
+
+function getDefaultAppData() {
+  return JSON.parse(JSON.stringify({
+    recipes: DEFAULT_RECIPES,
+    categories: DEFAULT_CATEGORIES,
+    tastes: DEFAULT_TASTES,
+    ingredients: DEFAULT_INGREDIENTS
+  }));
+}
+
 
 let appData = loadAppData();
 
@@ -41,8 +56,12 @@ const resetDataBtn = document.getElementById("resetDataBtn");
  */
 function loadAppData() {
   const saved = localStorage.getItem(STORAGE_KEY);
+  const savedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
+  const currentVersion = getCurrentDataVersion();
 
-  if (saved) {
+  // 只有本地数据版本和 data.js 版本一致时，才继续使用 localStorage。
+  // 发布后的 data.js 一旦更新，旧浏览器会自动丢弃旧 localStorage 并读取最新菜单。
+  if (saved && savedVersion === currentVersion) {
     try {
       const parsed = JSON.parse(saved);
 
@@ -57,14 +76,11 @@ function loadAppData() {
     }
   }
 
-  const initialData = {
-    recipes: DEFAULT_RECIPES,
-    categories: DEFAULT_CATEGORIES,
-    tastes: DEFAULT_TASTES,
-    ingredients: DEFAULT_INGREDIENTS
-  };
+  const initialData = getDefaultAppData();
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+  localStorage.setItem(STORAGE_VERSION_KEY, currentVersion);
+
   return initialData;
 }
 
@@ -73,6 +89,7 @@ function loadAppData() {
  */
 function saveAppData() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+  localStorage.setItem(STORAGE_VERSION_KEY, getCurrentDataVersion());
 }
 
 /**
@@ -357,8 +374,16 @@ function addManagerItem(type, input) {
  * 生成 data.js 文件内容
  * 这个内容可以直接覆盖 source/recipes/js/data.js
  */
+function createExportDataVersion() {
+  return new Date().toISOString().replace(/\D/g, "").slice(0, 14);
+}
+
 function generateDataJsContent() {
-  return `const DEFAULT_RECIPES = ${JSON.stringify(appData.recipes, null, 2)};
+  const exportVersion = createExportDataVersion();
+
+  return `const DATA_VERSION = "${exportVersion}";
+
+const DEFAULT_RECIPES = ${JSON.stringify(appData.recipes, null, 2)};
 
 const DEFAULT_CATEGORIES = ${JSON.stringify(appData.categories, null, 2)};
 

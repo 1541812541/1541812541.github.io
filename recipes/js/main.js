@@ -1,5 +1,20 @@
 const STORAGE_KEY = "recipes_app_data";
 const FAVORITE_KEY = "recipes_favorites";
+const STORAGE_VERSION_KEY = STORAGE_KEY + "_version";
+
+function getCurrentDataVersion() {
+  return typeof DATA_VERSION === "string" ? DATA_VERSION : "dev";
+}
+
+function getDefaultAppData() {
+  return JSON.parse(JSON.stringify({
+    recipes: DEFAULT_RECIPES,
+    categories: DEFAULT_CATEGORIES,
+    tastes: DEFAULT_TASTES,
+    ingredients: DEFAULT_INGREDIENTS
+  }));
+}
+
 
 let appData = loadAppData();
 let currentPage = "discover";
@@ -48,8 +63,12 @@ const PLACEHOLDER_SVG = "data:image/svg+xml," + encodeURIComponent(
  */
 function loadAppData() {
   const saved = localStorage.getItem(STORAGE_KEY);
+  const savedVersion = localStorage.getItem(STORAGE_VERSION_KEY);
+  const currentVersion = getCurrentDataVersion();
 
-  if (saved) {
+  // 只有本地数据版本和 data.js 版本一致时，才继续使用 localStorage。
+  // 发布后的 data.js 一旦更新，旧浏览器会自动丢弃旧 localStorage 并读取最新菜单。
+  if (saved && savedVersion === currentVersion) {
     try {
       const parsed = JSON.parse(saved);
 
@@ -64,14 +83,11 @@ function loadAppData() {
     }
   }
 
-  const initialData = {
-    recipes: DEFAULT_RECIPES,
-    categories: DEFAULT_CATEGORIES,
-    tastes: DEFAULT_TASTES,
-    ingredients: DEFAULT_INGREDIENTS
-  };
+  const initialData = getDefaultAppData();
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(initialData));
+  localStorage.setItem(STORAGE_VERSION_KEY, currentVersion);
+
   return initialData;
 }
 

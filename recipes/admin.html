@@ -156,19 +156,50 @@
     </section>
   </main>
 
-  <script src="./js/data.js"></script>
-  <script src="./js/admin.js"></script>
-
   <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js");
-    }
-  </script>
+    (async function () {
+      // 每次打开页面都使用新的查询参数，避免旧浏览器继续读取缓存里的 data.js / admin.js
+      const version = Date.now().toString();
 
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js");
-    }
+      async function disableOldRecipeServiceWorker() {
+        // 这个项目是静态博客，菜单数据以发布后的 data.js 为准，因此关闭旧的 PWA 缓存。
+        if ("serviceWorker" in navigator) {
+          try {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(registrations.map(registration => registration.unregister()));
+          } catch (error) {
+            console.warn("Service Worker 清理失败。", error);
+          }
+        }
+
+        if ("caches" in window) {
+          try {
+            const keys = await caches.keys();
+            await Promise.all(
+              keys
+                .filter(key => key.startsWith("recipes-"))
+                .map(key => caches.delete(key))
+            );
+          } catch (error) {
+            console.warn("旧缓存清理失败。", error);
+          }
+        }
+      }
+
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src + (src.includes("?") ? "&" : "?") + "v=" + version;
+          script.onload = resolve;
+          script.onerror = () => reject(new Error("脚本加载失败：" + src));
+          document.body.appendChild(script);
+        });
+      }
+
+      await disableOldRecipeServiceWorker();
+      await loadScript("./js/data.js");
+      await loadScript("./js/admin.js");
+    })();
   </script>
 </body>
 </html>
