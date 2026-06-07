@@ -858,6 +858,7 @@ button {
 .tips-text {
   color: rgba(255, 255, 255, 0.68);
   line-height: 1.8;
+  white-space: pre-line;
 }
 
 /* =========================
