@@ -1,4 +1,4 @@
-const DATA_VERSION = "20260619032538";
+const DATA_VERSION = "20260619033217";
 
 const DEFAULT_RECIPES = [
   {
@@ -224,7 +224,16 @@ const DEFAULT_RECIPES = [
       "土豆",
       "葱",
       "蒜",
-      "青椒"
+      "青椒",
+      "料酒",
+      "生抽",
+      "老抽",
+      "盐",
+      "淀粉",
+      "食用油",
+      "耗油",
+      "糖",
+      "鸡精"
     ],
     "time": "20分钟",
     "difficulty": "中等",
@@ -353,5 +362,7 @@ const DEFAULT_INGREDIENTS = [
   "百事可乐",
   "水淀粉",
   "白芝麻",
-  "里脊肉"
+  "里脊肉",
+  "淀粉",
+  "糖"
 ];
