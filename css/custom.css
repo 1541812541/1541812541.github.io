@@ -1,0 +1,473 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>/* ============================================================
+   Premium Theme (Optimized for Glassmorphism & Clean Text)
+============================================================ */
+
+/* ============================================================
+   GLOBAL (both modes)
+============================================================ */
+
+/* background layer */
+#web_bg {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; z-index: -3;
+  object-fit: cover;
+}
+
+/* transparent containers */
+#page-header { background: transparent !important; }
+#body-wrap { background: transparent !important; }
+#content-inner { background: transparent !important; }
+
+/* card shape */
+.card-widget, .recent-post-item {
+  border-radius: 14px !important;
+  transition: all .4s cubic-bezier(0.16,1,0.3,1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+}
+.card-widget:hover, .recent-post-item:hover {
+  transform: translateY(-2px);
+}
+
+/* layout */
+.layout > #post, .layout > #page {
+  border: none !important;
+  box-shadow: none !important;
+}
+#recent-posts > .recent-post-item {
+  margin-top: 1.5rem !important;
+}
+#article-container { background: transparent !important; }
+
+/* spotlight overlay */
+body::before {
+  content: "";
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; z-index: -2;
+  pointer-events: none;
+}
+body::after {
+  content: "";
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%; z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+[data-theme="dark"] body {
+  color: rgba(255,255,255,0.85) !important;
+}
+[data-theme="dark"] #web_bg {
+  filter: brightness(0.7) saturate(0.8) contrast(1.05);
+}
+[data-theme="dark"] body::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(200,200,220,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 25% at 25% 75%, rgba(180,180,200,0.025) 0%, transparent 60%);
+}
+[data-theme="dark"] body::after { opacity: 0.02; }
+
+/* dark cards */
+[data-theme="dark"] .card-widget,
+[data-theme="dark"] .recent-post-item {
+  background: rgba(0,0,0,0.25) !important;
+  backdrop-filter: blur(40px) saturate(100%);
+  -webkit-backdrop-filter: blur(40px) saturate(100%);
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.02) !important;
+}
+[data-theme="dark"] .card-widget:hover,
+[data-theme="dark"] .recent-post-item:hover {
+  background: rgba(0,0,0,0.35) !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  box-shadow: 0 0 24px rgba(255,255,255,0.03), 0 4px 16px rgba(0,0,0,0.5) !important;
+}
+
+/* dark search/sidebar */
+[data-theme="dark"] #local-search .search-dialog,
+[data-theme="dark"] #sidebar #sidebar-menus .menus_items {
+  background: rgba(15,15,22,0.92) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  border-radius: 14px !important;
+}
+
+/* dark post container */
+[data-theme="dark"] .layout > #post {
+  padding: 1.5rem 2rem !important;
+  border-radius: 14px !important;
+  background: rgba(0,0,0,0.2) !important;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* dark typography */
+[data-theme="dark"] .post-title-link,
+[data-theme="dark"] .post-title { color: rgba(255,255,255,0.9) !important; }
+[data-theme="dark"] .post-meta,
+[data-theme="dark"] .post-meta-wordcount,
+[data-theme="dark"] .post-meta-label { color: rgba(255,255,255,0.4) !important; }
+[data-theme="dark"] #article-container p,
+[data-theme="dark"] #article-container li,
+[data-theme="dark"] #article-container span,
+[data-theme="dark"] #article-container td,
+[data-theme="dark"] #article-container th { color: rgba(255,255,255,0.8) !important; }
+[data-theme="dark"] #article-container h1,
+[data-theme="dark"] #article-container h2,
+[data-theme="dark"] #article-container h3,
+[data-theme="dark"] #article-container h4 { color: rgba(255,255,255,0.9) !important; }
+[data-theme="dark"] #article-container a { color: rgba(160,190,240,0.85) !important; }
+[data-theme="dark"] #article-container a:hover { color: rgba(190,215,255,1) !important; }
+
+/* dark code blocks */
+[data-theme="dark"] #article-container figure.highlight,
+[data-theme="dark"] #article-container .highlight {
+  background: #1a1a22 !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  border-radius: 10px;
+}
+[data-theme="dark"] #article-container figure.highlight td.code,
+[data-theme="dark"] #article-container .highlight td.code { background: #1a1a22 !important; }
+
+/* ============================================================
+   LIGHT MODE (打薄白底，增强毛玻璃透视感)
+============================================================ */
+[data-theme="light"] body {
+  color: #1d1d1f !important;
+}
+[data-theme="light"] #web_bg {
+  filter: brightness(0.98) saturate(1.05) contrast(1.0);
+}
+[data-theme="light"] body::after { opacity: 0.01; }
+
+/* light cards - 将0.72降至0.55，让背景透出来 */
+/* light cards - 削薄白底，去除塑料感，增强通透感 */
+[data-theme="light"] .card-widget,
+[data-theme="light"] .recent-post-item {
+  background: rgba(255, 255, 255, 0.25) !important; /* 从 0.55 降到了 0.25，大幅提升透明度 */
+  backdrop-filter: blur(30px) saturate(150%); /* 增加模糊度和色彩饱和度，让透出来的背景更好看 */
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important; /* 边框变细变淡，保留一点点边缘反光即可 */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important; /* 稍微加深一点点阴影，让卡片浮起来 */
+}
+
+/* 鼠标悬停时的效果 */
+[data-theme="light"] .card-widget:hover,
+[data-theme="light"] .recent-post-item:hover {
+  background: rgba(255, 255, 255, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+}
+
+/* 顺便让内容区域也变通透 */
+[data-theme="light"] .layout > #post {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* light typography */
+[data-theme="light"] .post-title-link,
+[data-theme="light"] .post-title { color: rgba(0,0,0,0.85) !important; }
+[data-theme="light"] #article-container p,
+[data-theme="light"] #article-container li,
+[data-theme="light"] #article-container td,
+[data-theme="light"] #article-container th { color: rgba(0,0,0,0.75) !important; }
+[data-theme="light"] #article-container h1,
+[data-theme="light"] #article-container h2,
+[data-theme="light"] #article-container h3,
+[data-theme="light"] #article-container h4 { color: rgba(0,0,0,0.85) !important; }
+[data-theme="light"] #article-container a { color: #0071e3 !important; }
+
+/* code block tweaks */
+#article-container figure.highlight,
+#article-container .highlight { overflow: hidden !important; }
+#article-container figure.highlight table,
+#article-container .highlight table,
+#article-container figure.highlight td.code,
+#article-container .highlight td.code,
+#article-container figure.highlight td.code pre,
+#article-container .highlight td.code pre { width: 100% !important; }
+
+
+/* ============================================================
+   导航栏与页脚 (完全透明，去除文字阴影)
+============================================================ */
+
+/* 彻底移除所有背景色、毛玻璃、边框和阴影 */
+#nav,
+#page-header.nav-fixed #nav,
+#page-header.not-top-img #nav,
+#footer {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important; 
+  box-shadow: none !important;
+}
+
+/* 屏蔽部分主题自带的遮罩层 */
+#page-header::before,
+#footer::before {
+  display: none !important; 
+}
+
+/* 日间模式：恢复纯白文字，无发光阴影 */
+#nav #site-name,
+#nav .menus_items .menus_item a,
+#page-header.not-top-img #nav a,
+#page-header.not-top-img #nav #site-name,
+#page-header.nav-fixed #nav a,
+#page-header.nav-fixed #nav #site-name,
+#page-header.not-top-img #nav #toggle-menu,
+#page-header.nav-fixed #nav #toggle-menu,
+#footer-wrap,
+#footer-wrap a {
+  color: #fff !important; /* 这里从 #333 改回了 #fff 纯白色 */
+  text-shadow: none !important; 
+  transition: color 0.3s ease;
+}
+/* 悬停时的颜色 */
+#nav .menus_items .menus_item a:hover,
+#footer-wrap a:hover {
+  color: #0071e3 !important; 
+}
+
+/* ============================================================
+   夜间模式 (DARK MODE) 导航栏独立适配
+============================================================ */
+
+/* 夜间模式也保持背景完全透明 */
+[data-theme="dark"] #nav,
+[data-theme="dark"] #page-header.nav-fixed #nav,
+[data-theme="dark"] #page-header.not-top-img #nav,
+[data-theme="dark"] #footer {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 夜间模式：浅色文字，无发光阴影 */
+[data-theme="dark"] #nav #site-name,
+[data-theme="dark"] #nav .menus_items .menus_item a,
+[data-theme="dark"] #page-header.not-top-img #nav a,
+[data-theme="dark"] #page-header.not-top-img #nav #site-name,
+[data-theme="dark"] #page-header.nav-fixed #nav a,
+[data-theme="dark"] #page-header.nav-fixed #nav #site-name,
+[data-theme="dark"] #page-header.not-top-img #nav #toggle-menu,
+[data-theme="dark"] #page-header.nav-fixed #nav #toggle-menu,
+[data-theme="dark"] #footer-wrap,
+[data-theme="dark"] #footer-wrap a {
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-shadow: none !important; /* 已去除阴影 */
+}
+
+/* 夜间模式悬停色 */
+[data-theme="dark"] #nav .menus_items .menus_item a:hover,
+[data-theme="dark"] #footer-wrap a:hover {
+  color: #49b1f5 !important; 
+}
+
+/* ============================================================
+   强制日间模式卡片内文字反白 (专为高透深色壁纸适配)
+============================================================ */
+
+/* 主标题、正文、作者名、侧边栏标题等强制纯白 */
+[data-theme="light"] .recent-post-info .article-title,
+[data-theme="light"] .recent-post-info .content,
+[data-theme="light"] .author-info__name,
+[data-theme="light"] .author-info__description,
+[data-theme="light"] .card-info-data .headline,
+[data-theme="light"] .card-info-data .length-num,
+[data-theme="light"] .item-headline,
+[data-theme="light"] .card-widget .text,
+[data-theme="light"] .card-widget .item-title,
+[data-theme="light"] .card-widget .aside-list-title,
+[data-theme="light"] .card-widget .aside-list-item a {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 日期、分类、标签等次要信息使用半透明白，拉开视觉层次 */
+[data-theme="light"] .article-meta-wrap,
+[data-theme="light"] .article-meta-wrap a,
+[data-theme="light"] .post-meta-date,
+[data-theme="light"] .card-widget .aside-list-item .date {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 鼠标悬停时的品牌色高亮，保持交互感 */
+[data-theme="light"] .recent-post-info .article-title:hover,
+[data-theme="light"] .card-widget .aside-list-item a:hover {
+  color: #49b1f5 !important;
+}
+/* ============================================================
+   全局统一修复：让归档、分类、留言板、图库等独立页面也变成高透毛玻璃
+============================================================ */
+
+/* 1. 把所有遗漏的白色大方块背景打薄，加入高斯模糊 */
+[data-theme="light"] .layout > #page,
+[data-theme="light"] .layout > #archive,
+[data-theme="light"] .layout > #category,
+[data-theme="light"] .layout > #tag {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* 2. 强制这些界面里面的标题和正文变白，保证深色壁纸下的阅读体验 */
+[data-theme="light"] .layout > #page h1,
+[data-theme="light"] .layout > #page h2,
+[data-theme="light"] .layout > #page h3,
+[data-theme="light"] .layout > #page h4,
+[data-theme="light"] .layout > #page p,
+[data-theme="light"] .layout > #page li,
+[data-theme="light"] .layout > #archive .article-sort-title,
+[data-theme="light"] .layout > #archive .article-sort-item-title,
+[data-theme="light"] .category-lists .category-title,
+[data-theme="light"] .layout > #category .category-list-item a {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* 3. 归档时间、分类数量等次要文字使用半透明白，拉开层次 */
+[data-theme="light"] .layout > #archive .article-sort-item-time,
+[data-theme="light"] .layout > #category .category-list-count {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 4. 修复鼠标悬停在这些界面的链接上时的颜色 */
+[data-theme="light"] .layout > #archive .article-sort-item-title:hover,
+[data-theme="light"] .layout > #category .category-list-item a:hover {
+  color: #49b1f5 !important;
+}
+/* ============================================================
+   文章内部插件修复：Tabs标签页 & Details折叠块适配
+============================================================ */
+
+/* --- 1. Tabs 标签页终极适配（强力穿透） --- */
+
+/* 整个 Tabs 外框透明化 */
+[data-theme="light"] #article-container .tabs {
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 顶部导航条背景透明化 */
+[data-theme="light"] #article-container .tabs > .nav-tabs {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 强杀所有 Tab 按钮及其内部标签的死白底色，强制文字变白 */
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab button,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab a {
+  background: transparent !important;
+  border: none !important;
+  color: rgba(255, 255, 255, 0.7) !important; /* 未选中的文字半透明白 */
+  transition: all 0.3s ease !important;
+}
+
+/* 选中的 Tab 状态：微微的白底毛玻璃感，文字纯白，保留顶部的品牌色蓝条 */
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active button,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active a {
+  background: rgba(255, 255, 255, 0.15) !important; 
+  color: #fff !important; 
+  border-top: 2px solid #49b1f5 !important;
+}
+
+/* 鼠标悬停在未选中 Tab 上时的效果 */
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover button,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover a {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Tabs 内容区的文字强制变白 */
+[data-theme="light"] #article-container .tabs > .tab-contents {
+  background: transparent !important;
+}
+[data-theme="light"] #article-container .tabs > .tab-contents .tab-item-content {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+
+/* --- 2. Details 折叠块 / Note 提示框适配 --- */
+/* 去除自带的各种主题色实心背景，统一改为高透毛玻璃 */
+[data-theme="light"] #article-container details,
+[data-theme="light"] #article-container .note {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: rgba(255, 255, 255, 0.95) !important; /* 正文变白 */
+}
+
+/* 折叠块的标题栏 (Summary) */
+[data-theme="light"] #article-container details summary {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important; /* 标题变白 */
+}
+
+/* 如果折叠块里有文字，确保它们在毛玻璃上能看清 */
+[data-theme="light"] #article-container details > p,
+[data-theme="light"] #article-container details > div {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+/* ============================================================
+   侧边栏目录 (TOC) 文字反白与高亮适配
+============================================================ */
+
+/* 目录项未选中时的默认文字颜色（改为半透明白，柔和不刺眼） */
+[data-theme="light"] #card-toc .toc-link,
+[data-theme="light"] #card-toc .toc-text,
+[data-theme="light"] .card-widget .toc-content .toc-link .toc-text {
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.2s ease;
+}
+
+/* 鼠标悬停在目录项上时的颜色（品牌蓝） */
+[data-theme="light"] #card-toc .toc-link:hover,
+[data-theme="light"] #card-toc .toc-link:hover .toc-text,
+[data-theme="light"] .card-widget .toc-content .toc-link:hover .toc-text {
+  color: #49b1f5 !important;
+}
+
+/* 当前正在阅读的章节激活状态（纯白色加粗，更醒目） */
+[data-theme="light"] #card-toc .active > .toc-link .toc-text,
+[data-theme="light"] #card-toc .toc-item.active > .toc-link .toc-text,
+[data-theme="light"] .card-widget .toc-content .active > .toc-link .toc-text {
+  color: #fff !important;
+  font-weight: bold !important;
+}
+/* ============================================================
+   图库 (Gallery) 相册卡片兜底适配
+============================================================ */
+
+/* 去除相册卡片默认的死黑底色，改为半透明毛玻璃 */
+[data-theme="light"] .gallery-group {
+  background: rgba(255, 255, 255, 0.1) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* 即使图片加载出来，也给一层极其轻微的暗色遮罩，确保白色标题永远清晰 */
+[data-theme="light"] .gallery-group::before {
+  background: rgba(0, 0, 0, 0.2) !important; 
+}
+
+/* 确保相册标题文字是纯白且带有护眼阴影 */
+[data-theme="light"] .gallery-group .gallery-group-name {
+  color: #fff !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important; 
+}
+
+/* 修复左上角图片裂开时的替代文字颜色 */
+[data-theme="light"] .gallery-group img {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
