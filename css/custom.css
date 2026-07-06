@@ -146,7 +146,7 @@ body::after {
 /* light cards - 削薄白底，去除塑料感，增强通透感 */
 [data-theme="light"] .card-widget,
 [data-theme="light"] .recent-post-item {
-  background: rgba(255, 255, 255, 0.25) !important; /* 从 0.55 降到了 0.25，大幅提升透明度 */
+  background: rgba(255, 255, 255, 0.55) !important; /* 从 0.55 降到了 0.25，大幅提升透明度 */
   backdrop-filter: blur(30px) saturate(150%); /* 增加模糊度和色彩饱和度，让透出来的背景更好看 */
   -webkit-backdrop-filter: blur(30px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.15) !important; /* 边框变细变淡，保留一点点边缘反光即可 */
@@ -163,7 +163,7 @@ body::after {
 
 /* 顺便让内容区域也变通透 */
 [data-theme="light"] .layout > #post {
-  background: rgba(255, 255, 255, 0.25) !important;
+  background: rgba(255, 255, 255, 0.99999) !important;
   backdrop-filter: blur(30px) saturate(150%);
   -webkit-backdrop-filter: blur(30px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
@@ -443,31 +443,4 @@ body::after {
 [data-theme="light"] .card-widget .toc-content .active > .toc-link .toc-text {
   color: #fff !important;
   font-weight: bold !important;
-}
-/* ============================================================
-   图库 (Gallery) 相册卡片兜底适配
-============================================================ */
-
-/* 去除相册卡片默认的死黑底色，改为半透明毛玻璃 */
-[data-theme="light"] .gallery-group {
-  background: rgba(255, 255, 255, 0.1) !important; 
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* 即使图片加载出来，也给一层极其轻微的暗色遮罩，确保白色标题永远清晰 */
-[data-theme="light"] .gallery-group::before {
-  background: rgba(0, 0, 0, 0.2) !important; 
-}
-
-/* 确保相册标题文字是纯白且带有护眼阴影 */
-[data-theme="light"] .gallery-group .gallery-group-name {
-  color: #fff !important;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important; 
-}
-
-/* 修复左上角图片裂开时的替代文字颜色 */
-[data-theme="light"] .gallery-group img {
-  color: rgba(255, 255, 255, 0.5) !important;
 }
