@@ -444,3 +444,19 @@ body::after {
   color: #fff !important;
   font-weight: bold !important;
 }
+
+
+
+/* 让下拉子菜单背景变成高透毛玻璃，适配纯白文字 */
+#nav .menus_items .menus_item .menus_item_child {
+  background: rgba(255, 255, 255, 0.25) !important;
+  backdrop-filter: blur(30px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(150%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+/* 确保下拉菜单里的文字是纯白色 */
+#nav .menus_items .menus_item .menus_item_child a {
+  color: #fff !important;
+}
