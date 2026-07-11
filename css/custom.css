@@ -363,60 +363,61 @@ body::after {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-/* 强杀所有 Tab 按钮及其内部标签的死白底色，强制文字变白 */
+/* 强杀所有 Tab 按钮及其内部标签的底色，强制文字变深色，采用硬朗的直角方框风格 */
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab,
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab button,
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab a {
   background: transparent !important;
   border: none !important;
-  color: rgba(255, 255, 255, 0.7) !important; /* 未选中的文字半透明白 */
+  border-radius: 0 !important; /* 强制使用方框，去除默认的圆角 */
+  color: rgba(0, 0, 0, 0.6) !important; /* 未选中状态保持深灰色 */
   transition: all 0.3s ease !important;
 }
 
-/* 选中的 Tab 状态：微微的白底毛玻璃感，文字纯白，保留顶部的品牌色蓝条 */
+/* 选中的 Tab 状态：浅蓝色微底色，强制内部所有层级的文字和图标变成主题蓝 */
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active,
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active button,
-[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active a {
-  background: rgba(255, 255, 255, 0.15) !important; 
-  color: #fff !important; 
-  border-top: 2px solid #49b1f5 !important;
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active a,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active i,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab.active span {
+  background: rgba(73, 177, 245, 0.05) !important; /* 增加微微的蓝色背景，提升层次感 */
+  color: #49b1f5 !important; /* 强制全部变成蓝色 */
+  border-top: 2px solid #49b1f5 !important; /* 保留顶部的蓝色线条 */
+  border-radius: 0 !important; /* 保持方正 */
 }
 
-/* 鼠标悬停在未选中 Tab 上时的效果 */
+/* 鼠标悬停在未选中 Tab 上时的效果：文字变蓝，显示浅蓝方框背景 */
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover,
 [data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover button,
-[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover a {
-  color: #fff !important;
-  background: rgba(255, 255, 255, 0.05) !important;
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover a,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover i,
+[data-theme="light"] #article-container .tabs > .nav-tabs > .tab:hover span {
+  color: #49b1f5 !important; /* 悬停时文字变为主题蓝，彻底解决白底白字看不清的问题 */
+  background: rgba(73, 177, 245, 0.1) !important; /* 悬停时出现浅蓝色的方框背景交互 */
+  border-radius: 0 !important; /* 保持方框风格 */
 }
 
-/* Tabs 内容区的文字强制变白 */
+/* Tabs 内容区的文字强制变黑 */
 [data-theme="light"] #article-container .tabs > .tab-contents {
   background: transparent !important;
 }
 [data-theme="light"] #article-container .tabs > .tab-contents .tab-item-content {
-  color: rgba(255, 255, 255, 0.95) !important;
+  color: rgba(0, 0, 0, 0.95) !important;
 }
 
 
-/* --- 2. Details 折叠块 / Note 提示框适配 --- */
-/* 去除自带的各种主题色实心背景，统一改为高透毛玻璃 */
+/* 去除自带的各种主题色实心背景，统一改为高透毛玻璃（需修改文字颜色） */
 [data-theme="light"] #article-container details,
 [data-theme="light"] #article-container .note {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  color: rgba(255, 255, 255, 0.95) !important; /* 正文变白 */
-}
-
-/* 折叠块的标题栏 (Summary) */
-[data-theme="light"] #article-container details summary {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #fff !important; /* 标题变白 */
+  background: rgba(0, 0, 0, 0.05) !important; /* 背景稍微改深一点点以区分正文 */
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: rgba(0, 0, 0, 0.85) !important; /* 正文变深色 */
 }
 
 /* 如果折叠块里有文字，确保它们在毛玻璃上能看清 */
 [data-theme="light"] #article-container details > p,
 [data-theme="light"] #article-container details > div {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: rgba(0, 0, 0, 0.8) !important; /* 从白色改为深色 */
 }
 /* ============================================================
    侧边栏目录 (TOC) 文字反白与高亮适配
