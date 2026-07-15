@@ -1,0 +1,725 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>硬件电路原理图分析 | 晓</title><meta name="keywords" content="晓氏集团"><meta name="author" content="one by one"><meta name="copyright" content="one by one"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="EMI 及保护电路分析在交流电网与开关电源主功率级（如 PFC 级）之间，必须设计一层“屏障”，这层屏障就是 EMI（电磁干扰）滤波及保护电路。它的核心使命有两个：一是保护后级电路免受电网尖峰和异常的损坏；二是双向滤波，既防止电网的杂波干扰电源，也绝对禁止电源内部产生的高频开关噪声污染公共电网。 结合提供的电路原理图与计算文档，我们将对该模块进行逐一拆解分析。   输入接口与保险丝选型 (FA1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="硬件电路原理图分析">
+<meta property="og:url" content="http://xiaoxigroup.org/blog/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="晓">
+<meta property="og:description" content="EMI 及保护电路分析在交流电网与开关电源主功率级（如 PFC 级）之间，必须设计一层“屏障”，这层屏障就是 EMI（电磁干扰）滤波及保护电路。它的核心使命有两个：一是保护后级电路免受电网尖峰和异常的损坏；二是双向滤波，既防止电网的杂波干扰电源，也绝对禁止电源内部产生的高频开关噪声污染公共电网。 结合提供的电路原理图与计算文档，我们将对该模块进行逐一拆解分析。   输入接口与保险丝选型 (FA1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://xiaoxigroup.org/media/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90.webp">
+<meta property="article:published_time" content="2026-07-14T07:29:19.000Z">
+<meta property="article:modified_time" content="2026-07-15T12:38:30.783Z">
+<meta property="article:author" content="one by one">
+<meta property="article:tag" content="晓氏集团">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xiaoxigroup.org/media/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90.webp"><link rel="shortcut icon" href="/media/2.jpg"><link rel="canonical" href="http://xiaoxigroup.org/blog/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '硬件电路原理图分析',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-07-15 20:38:30'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zfour/Butterfly-double-row-display@1.00/cardlistpost.min.css"/>
+<style>#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags:before {content:"\A";
+  white-space: pre;}#recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap > .tags > .article-meta__separator{display:none}</style>
+<link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><script src="https://npm.elemecdn.com/hexo-butterfly-tag-plugins-plus@latest/lib/assets/carousel-touch.js"></script><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/1.webp" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/todolist"><span> 计划表</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-book"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-camera"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note"><i class="fa-fw fas fa-file-circle-check"></i><span> 笔记</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="http://985.so/bmx9r"><i class="fa-fw fas fa-headphones"></i><span> 夜听电脑版</span></a></li><li><a class="site-page child" href="/music-friends"><i class="fa-fw fas fa-headphones"></i><span> 音乐库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="http://985.so/mwb21"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/recipes/"><i class="fa-fw fas fa-utensils"></i><span> 食谱汇总</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/media/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90.webp')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">晓</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/todolist"><span> 计划表</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 我的</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E5%A4%A7%E6%95%B0%E6%8D%AE/"><i class="fa-fw fas fa-book"></i><span> 作业</span></a></li><li><a class="site-page child" href="/myimage/"><i class="fa-fw fas fa-camera"></i><span> 图片</span></a></li><li><a class="site-page child" href="/note"><i class="fa-fw fas fa-file-circle-check"></i><span> 笔记</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="http://985.so/bmx9r"><i class="fa-fw fas fa-headphones"></i><span> 夜听电脑版</span></a></li><li><a class="site-page child" href="/music-friends"><i class="fa-fw fas fa-headphones"></i><span> 音乐库</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fas fa-envelope-open"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="http://985.so/mwb21"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/recipes/"><i class="fa-fw fas fa-utensils"></i><span> 食谱汇总</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">硬件电路原理图分析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-07-14T07:29:19.000Z" title="发表于 2026-07-14 15:29:19">2026-07-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-07-15T12:38:30.783Z" title="更新于 2026-07-15 20:38:30">2026-07-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%94%B5%E6%BA%90%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%B7%A5%E7%A8%8B/">电源与控制工程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">12.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>40分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="硬件电路原理图分析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><script src="/assets/js/DPlayer.min.js"> </script><h1 id="EMI-及保护电路分析"><a href="#EMI-及保护电路分析" class="headerlink" title="EMI 及保护电路分析"></a>EMI 及保护电路分析</h1><p>在交流电网与开关电源主功率级（如 PFC 级）之间，必须设计一层“屏障”，这层屏障就是 EMI（电磁干扰）滤波及保护电路。它的核心使命有两个：一是<strong>保护后级电路</strong>免受电网尖峰和异常的损坏；二是<strong>双向滤波</strong>，既防止电网的杂波干扰电源，也绝对禁止电源内部产生的高频开关噪声污染公共电网。</p>
+<p>结合提供的电路原理图与计算文档，我们将对该模块进行逐一拆解分析。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/EMI电路分析.webp" alt="EMI电路分析"></p>
+<hr>
+<h2 id="输入接口与保险丝选型-FA1"><a href="#输入接口与保险丝选型-FA1" class="headerlink" title="输入接口与保险丝选型 (FA1)"></a>输入接口与保险丝选型 (FA1)</h2><p><strong>JA1</strong> 是电源的物理输入端口，采用 7.62mm 间距的 3Pin 端子。其中引脚 1 和 2 接入 220V 交流电（L 火线与 N 零线），引脚 3 接入安全地（PE 机壳地）。</p>
+<p><strong>FA1</strong> 是一颗保险丝，位于火线的最前端。当后级电路发生严重故障（如 MOS 管击穿短路）时，输入电流会剧增，当达到一定程度时保险丝发热熔断，切断物理连接，防止火灾等进一步损坏。</p>
+<ul>
+<li><strong>保险丝额定电流选型计算</strong>：<br>输入保险丝的选型原则为 PFC 工作最大电流平均值的 1.5~2 倍余量。我们取 1.5 倍余量进行计算：<script type="math/tex; mode=display">IK_{Fuse} := 1.5</script><script type="math/tex; mode=display">I_{FuseRate} := IK_{Fuse} \cdot I_{acMax} = 4.531\text{A}</script><ul>
+<li><strong>变量说明</strong>：<ul>
+<li>$I_{acMax}$：系统在最恶劣情况（最低输入电压、满载）下的<strong>最大输入电流有效值</strong>（前文计算约为 3.021A）。</li>
+<li>$IK_{Fuse}$：人为设定的安全余量倍数。</li>
+<li>$I_{FuseRate}$：保险丝需要具备的额定熔断电流。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>选型结论</strong>：选用 <strong>5A/250VAC</strong> 的快速熔断型保险丝（保险丝断开时两端需承受电网最高电压，故耐压必须大于 253VAC）。</p>
+<hr>
+<h2 id="差模干扰与-X-电容选型-CX1-CX2"><a href="#差模干扰与-X-电容选型-CX1-CX2" class="headerlink" title="差模干扰与 X 电容选型 (CX1, CX2)"></a>差模干扰与 X 电容选型 (CX1, CX2)</h2><p><strong>差模干扰</strong>是指存在于 L 线与 N 线之间的干扰电流。在这条通路上，后级 PFC 电路中高速开关的 MOS 管和二极管会产生大量的高频杂波。</p>
+<p><strong>X 电容的核心作用</strong>：</p>
+<ol>
+<li><strong>向内吸收</strong>：电网上的 220V 正弦波电压其实并不光滑，带有许多高频凹凸和纹波。X 电容可以吸收这些电网上的纹波，防止它们进入并干扰 PFC 的正常工作。</li>
+<li><strong>向外平滑</strong>：PFC 升压电感（LA1）上流过的“馒头波”电流携带着开关频率带来的高频锯齿纹波。X 电容在这里充当低通滤波器，使得从 JA1 端口流入电网的电流变得光滑，减少对电网的污染。</li>
+<li><strong>CLC 滤波网络</strong>：图中的 CX1、CX2 与共模电感 LA2 的“漏感”共同构成了一个经典的 CLC（$\pi$ 型）差模滤波电路。</li>
+</ol>
+<ul>
+<li><p><strong>X 电容容量计算</strong>：<br>通常情况输入电压纹波系数取 0.05~0.08，代表输入电压纹波包络线。本设计中假定滤波后的输入电压纹波系数（脉动系数）大小为 0.02：</p>
+<script type="math/tex; mode=display">VK_{Ripple} := 0.02</script><script type="math/tex; mode=display">Vac_{Ripple} := VK_{Ripple} \cdot VacMinPeak = 4.978\text{V}</script><ul>
+<li><strong>变量说明</strong>：$VacMinPeak$ 为最低交流输入电压的<strong>峰值</strong>。计算出 $Vac_{Ripple}$ 为 4.978V，意味着幅度大于约 4.97V 的脉动电压都会被 X 电容吸收掉。</li>
+</ul>
+<script type="math/tex; mode=display">C_X := \frac{IL_{Ripple}}{8 \cdot f_s \cdot Vac_{Ripple}} = 7.151 \times 10^{-7}\text{F}</script><ul>
+<li><strong>变量说明</strong>：<ul>
+<li>$IL_{Ripple}$：PFC 电感电流的纹波峰值。</li>
+<li>$f_s$：开关频率。</li>
+<li>$C_X$：所需的总 X 电容容量。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>选型结论</strong>：计算得出需要约 0.715uF 的电容。实际设计中留有一定余量，选用了两颗 <strong>1uF/275VAC 的 X2 安规电容</strong>分布在电感前后。<em>(注：旁边的 RA2 和 RA9 243K 电阻是放电电阻，作用是当设备拔掉插头掉电时，快速泄放掉 X 电容上存储的高压电，防止触电。)</em></p>
+<hr>
+<h2 id="共模干扰、Y-电容与共模电感-CY1-CY2-CY3-LA2"><a href="#共模干扰、Y-电容与共模电感-CY1-CY2-CY3-LA2" class="headerlink" title="共模干扰、Y 电容与共模电感 (CY1, CY2, CY3, LA2)"></a>共模干扰、Y 电容与共模电感 (CY1, CY2, CY3, LA2)</h2><p><strong>共模干扰</strong>是指因为设备内部导体（如开关管散热片）与大地（PE/机壳）之间存在寄生电容（也叫匝上电容），导致高频开关动作时，产生了流向大地的漏电流。如果不加以吸收，这些电流会在系统里乱窜。</p>
+<p><strong>Y 电容的作用</strong>：</p>
+<ol>
+<li><strong>CY3（内部吸收）</strong>：跨接在直流母线负极（PGND）与机壳大地（PE）之间。它的作用是就近吸收二极管（DA1~DA3）以及 MOS 管在快速开关时产生的高频共模电流，给它们提供一个最短的回流路径。</li>
+<li><strong>CY1 &amp; CY2（端口拦截）</strong>：跨接在 L/N 线与 PE 之间。它们的目的是为了防止电路右端的共模电流流入左侧的电网侧（国家对此有严格的 EMI 辐射标准）。同时，它们也能吸收电网侧本身携带的共模干扰。<blockquote>
+<p><strong>⚠️ 工程避坑指南</strong>：Y 电容的容量<strong>绝不能选得太大</strong>！因为它们直接连接火线和大地，如果容量过大，交流电通过电容产生的漏电流就会变大。在上电瞬间，极易导致配电箱里的漏电保护器跳闸。实际做 EMI 认证时，工程师会根据 PCB 布局的寄生电容大小和开关速度，反复调试 CY1 和 CY2 的值。本设计选用 <strong>2.2nF/250VAC</strong>。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>共模电感 (LA2)</strong>：<br>共模电感在同一个磁芯上绕制了方向相反的两个线圈。</p>
+<ul>
+<li>当<strong>共模电流</strong>（在 L 和 N 上方向相同）流过时，两者的磁动势方向相同，互相叠加，电感呈现极大的阻抗，从而<strong>消除共模电流</strong>。</li>
+<li>当<strong>差模电流</strong>（在 L 和 N 上方向相反的正常工作电流）流过时，磁动势互相抵消，电感呈现极小的阻抗，不会阻碍能量传输。但由于制造工艺不可能完美耦合，总会漏出一小部分电感，这部分<strong>漏感</strong>就正好充当了前面提到的差模滤波电感。本设计选用 10mH/SQ1918 规格。</li>
+</ul>
+<hr>
+<h2 id="压敏电阻选型-RA6"><a href="#压敏电阻选型-RA6" class="headerlink" title="压敏电阻选型 (RA6)"></a>压敏电阻选型 (RA6)</h2><p>压敏电阻是一颗过压保护元件，并联在输入端。当遇到雷击或电网浪涌产生极高的电压尖峰时，它会瞬间导通短路，吸收浪涌能量并可能熔断前级的保险丝，从而保护后级所有昂贵的半导体器件。<br>正常情况下这个压敏电阻阻值很大，相当于断路，不起作用</p>
+<ul>
+<li><strong>压敏电压计算</strong>：<br>压敏电阻的电压值必须<strong>大于实际电路能出现的最大峰值电压</strong>，一般应用下式进行选择：<script type="math/tex; mode=display">VmA := \frac{a \cdot v}{b \cdot c} = 561.164\text{V}</script><ul>
+<li><strong>变量说明</strong>：<ul>
+<li>$a := 1.2$：电网电压波动系数（电网电压可能会偏高 20%）。</li>
+<li>$v := 253 \cdot 1.414$：交流输入最高额定电压的<strong>有效值</strong>（253V）乘以 1.414（$\sqrt{2}$），换算成交流应用场合下的<strong>最大峰值电压</strong>。</li>
+<li>$b := 0.85$：压敏电阻的制造误差参数。</li>
+<li>$c := 0.9$：元件的老化系数（压敏电阻随时间老化，阈值会降低）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>选型结论</strong>：查询相关手册，选用 <strong>10D561K</strong> 型号压敏电阻，其标称压敏电压范围为 504V~616V，刚好完美包络我们计算出的 561V 目标值。</p>
+<h1 id="启动浪涌抑制与继电器控制电路分析"><a href="#启动浪涌抑制与继电器控制电路分析" class="headerlink" title="启动浪涌抑制与继电器控制电路分析"></a>启动浪涌抑制与继电器控制电路分析</h1><p>在开关电源上电的瞬间，系统面临着一个极其严峻的物理考验：<strong>启动冲击浪涌电流（Inrush Current）</strong>。为了保护后级昂贵的电容和半导体器件，必须设计专门的软启动抑制电路。</p>
+<p>结合提供的原理图，我们将详细剖析这一由 <strong>热敏电阻 (RA1)</strong> 和 <strong>继电器 (JKA1)</strong> 及其控制外围构成的经典保护电路。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/继电器的应用.webp" alt="继电器的应用"></p>
+<hr>
+<h2 id="浪涌电流的产生与-RA1-的抑制作用"><a href="#浪涌电流的产生与-RA1-的抑制作用" class="headerlink" title="浪涌电流的产生与 RA1 的抑制作用"></a>浪涌电流的产生与 RA1 的抑制作用</h2><p><strong>1. 为什么会有无穷大的启动电流？</strong><br>在上电的瞬间，高压母线电解电容 <strong>CA1</strong> 和 <strong>CA2</strong> 内部完全没有电荷，其两端电压为 0。在电路原理中，电压为 0 的电容在接通瞬间等效于<strong>物理短路</strong>。<br>此时，如果没有额外的限流措施，启动的冲击电流大小完全取决于输入电压和线路的寄生阻抗：</p>
+<script type="math/tex; mode=display">I_{inrush} := \frac{V_{inPeak}}{Z_{line}}</script><ul>
+<li><strong>$I_{inrush}$</strong>：上电瞬间的启动浪涌电流【峰值】。</li>
+<li><strong>$V_{inPeak}$</strong>：交流输入电压的最高峰值（例如 220V 交流电的峰值为 311V）。</li>
+<li><strong>$Z_{line}$</strong>：线路的总阻抗。如果没有额外元件，这个阻抗极小，仅包含 PCB 铜箔的内阻、整流桥内阻和电感线圈的直流电阻。<br>由于 $Z_{line}$ 趋近于 0，理论上的启动电流 $I_{inrush}$ 会变得极大（甚至达到上百安培），极易瞬间击穿整流桥或将电容 CA1、CA2 内部直接炸毁。</li>
+</ul>
+<p><strong>2. NTC 热敏电阻 (RA1) 的作用与选型</strong><br>为了限制这个电流，我们在火线（ACL）上串联了一颗负温度系数（NTC）的热敏电阻 <strong>RA1</strong>。</p>
+<ul>
+<li><strong>冷态高阻</strong>：在上电瞬间（常温状态），NTC 的阻值很大，能够像一个大电阻一样死死卡住电流，将启动浪涌电流限制在安全范围内。</li>
+<li><strong>选型计算</strong>：RA1 的阻值选取取决于应用场景对最大启动电流的限制。<script type="math/tex; mode=display">R_{NTC} := \frac{V_{inPeak}}{I_{max}}</script><em>假设系统要求启动电流被限制在不超过 30A，而 220V 交流输入的峰值 $V_{inPeak}$ 为 311V，那么我们需要的常温阻值为 $R_{NTC} = 311 / 30 \approx 10\Omega$。</em></li>
+</ul>
+<hr>
+<h2 id="继电器-JKA1-的旁路机制"><a href="#继电器-JKA1-的旁路机制" class="headerlink" title="继电器 (JKA1) 的旁路机制"></a>继电器 (JKA1) 的旁路机制</h2><p>热敏电阻虽然能完美解决上电浪涌问题，但带来了一个致命缺陷：如果电源一直满载运行，巨大的工作电流流过 RA1 会产生严重的发热，这不仅极大地拖垮了电源的整机效率，还会导致 RA1 烧毁。即使 NTC 在发热后阻值会降低，但残余阻值依然会导致不可忽视的有功损耗。</p>
+<p><strong>因此，引入了继电器 JKA1 进行“过河拆桥”式的旁路（Bypass）操作：</strong></p>
+<ol>
+<li>上电初期，继电器处于断开状态，电流被迫全部流经热敏电阻 RA1，完成电容 CA1、CA2 的软启动充电。</li>
+<li>当控制板检测到高压母线上的电压（VBUS）已经平稳建立（说明电容充电完毕，短路效应消失），控制系统便会发出指令。</li>
+<li>继电器 JKA1 内部触点吸合，将引脚 <strong>3</strong> 和 <strong>4</strong> 物理短接。</li>
+<li>由于继电器触点的接触电阻几乎为 0（远小于 RA1），主功率电流将全部从继电器内部流过，RA1 被彻底短路旁路，不再发热发功。</li>
+</ol>
+<hr>
+<h2 id="继电器底层控制与保护电路深度解析"><a href="#继电器底层控制与保护电路深度解析" class="headerlink" title="继电器底层控制与保护电路深度解析"></a>继电器底层控制与保护电路深度解析</h2><p>继电器的线圈无法由单片机（MCU）的 IO 口直接驱动，必须依靠一套包含功率放大与状态保护的外围电路。</p>
+<p><strong>1. 三极管驱动 (QA1)</strong><br>继电器的线圈由 NPN 型三极管 <strong>QA1 (SS8050)</strong> 控制。</p>
+<ul>
+<li><strong>Relay 网络</strong>连接到控制板的 MCU。</li>
+<li>当母线电压建立后，MCU 输出高电平，通过基极电阻 <strong>RA8</strong> 使得 QA1 导通。</li>
+<li>12V 辅助电源（P12V）经过继电器线圈、再经过 QA1 流向地（PGND）。线圈得电产生磁力，吸合主电路的 3、4 触点。</li>
+</ul>
+<p><strong>2. 续流二极管保护 (DA4)</strong><br>继电器的内部是一个由铜线绕制的电感线圈。电感的物理特性是“电流不能突变，且会储存能量”。</p>
+<ul>
+<li>当系统关机或保护动作时，MCU 将 Relay 信号拉低，三极管 QA1 瞬间关断。</li>
+<li>此时线圈内的电流失去了通路，为了维持原有的电流，线圈两端会瞬间感应出极高的反向电动势（甚至可达几百伏），这会瞬间击穿脆弱的 QA1。</li>
+<li><strong>DA4 (SS210)</strong> 并联在线圈两端，充当<strong>续流二极管</strong>。当 QA1 关断时，DA4 瞬间导通，将线圈中储存的磁场能量引导回 P12V 并在自身管压降和线圈内阻上快速消耗掉，从而完美保护了三极管。</li>
+</ul>
+<p><strong>3. 下拉电阻防抖防误触发 (RA89)</strong><br>这是电路设计中非常考究的一个安全细节。</p>
+<ul>
+<li>在设备刚插上电的瞬间，辅助电源可能还没有完全建立，控制板的 MCU 也正处于复位或启动初始化的过程中。此时，MCU 的 <strong>Relay 控制引脚是一个未知的浮空电平</strong>（比如飘在 1.5V 左右的临界区）。</li>
+<li>如果不加电阻 <strong>RA89</strong>，这个浮空电压会使得 QA1 处于半导通或频繁开关的放大区状态，导致继电器在上电瞬间“咔哒咔哒”地疯狂跳动（Chattering），极易烧毁触点。</li>
+<li><strong>RA89 的作用</strong>：跨接在基极和地之间，充当<strong>强下拉电阻</strong>。在辅助电源未就绪或 MCU 管脚悬空时，强制将 QA1 的基极电位牢牢拉到 0V 使得其完全关断。只有当 MCU 启动完毕并输出极其明确的强高电平驱动信号时，继电器才允许动作，保证了控制逻辑的绝对可靠。</li>
+</ul>
+<h1 id="PFC-主功率电路与驱动电路深度分析"><a href="#PFC-主功率电路与驱动电路深度分析" class="headerlink" title="PFC 主功率电路与驱动电路深度分析"></a>PFC 主功率电路与驱动电路深度分析</h1><p>在现代高频开关电源设计中，PFC（功率因数校正）电路是整个电源系统的“前锋”，不仅需要承受复杂的电网工况，还必须通过精密的控制实现电流波形的重塑。而在数字控制系统中（如基于 TMS320F28034 等 DSP 控制器），驱动电路则是连接弱电控制逻辑与强电功率器件的关键桥梁。</p>
+<p>以下将结合原理图，对 PFC 主电路的旁路保护设计、RCD 尖峰吸收网络，以及基于 EG27324 的隔离驱动电路进行逐一拆解。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/PFC电路.webp" alt="PFC电路"></p>
+<hr>
+<h2 id="PFC-主功率电路及关键元器件解析"><a href="#PFC-主功率电路及关键元器件解析" class="headerlink" title="PFC 主功率电路及关键元器件解析"></a>PFC 主功率电路及关键元器件解析</h2><h3 id="物理测试接口与放电网络"><a href="#物理测试接口与放电网络" class="headerlink" title="物理测试接口与放电网络"></a>物理测试接口与放电网络</h3><ul>
+<li><strong>电流探头接入点 (CNTA1, CNTA2)</strong>：这两个端口在正常工作时是物理短接的。在进行闭环调试或硬件在环测试时，可以断开这根连接线，串入高频电流探头（Current Probe）。这样可以精准捕获流经升压电感 <strong>LA1</strong> 的真实高频电流纹波，用于比对控制算法的跟踪效果。</li>
+<li><strong>假负载与泄放电路 (RA4, RA5, RA11, RA12)</strong>：这四个串并联的电阻直接跨接在 380V 高压母线（VBUS+ 与 VBUS-）两端。当整机断电停止工作时，母线电容（CA1, CA2）上储存的致命高压能量会通过这些电阻快速转化为热能释放掉，确保维护人员的人身安全。</li>
+</ul>
+<h3 id="防浪涌旁路二极管-DA1"><a href="#防浪涌旁路二极管-DA1" class="headerlink" title="防浪涌旁路二极管 (DA1)"></a>防浪涌旁路二极管 (DA1)</h3><p>在主电感 LA1 的输入端和输出端之间，并联了一颗极高耐压的防冲击二极管 <strong>DA1 (MUR8100E)</strong>。</p>
+<ul>
+<li><strong>原理解析</strong>：在正常工作状态下，电网 220V 交流电整流后的峰值电压约为 $220\text{V} \cdot \sqrt{2} \approx 311\text{V}$。而 PFC 升压后的输出母线电压为稳定的 380V。此时 $311\text{V} &lt; 380\text{V}$，二极管 DA1 承受反向偏置，完全截止，不参与工作。</li>
+<li><strong>异常保护</strong>：当电网遭遇雷击或重型设备启停引发极高的脉冲电压尖峰时，LA1 左侧的瞬间峰值将远大于 380V。此时 DA1 瞬间正向导通，将庞大的浪涌电流直接“旁路（Bypass）”到后级的母线大电容（CA1, CA2）中吸收。</li>
+<li><strong>选型逻辑</strong>：这种浪涌冲击是瞬态的，因此 DA1 的<strong>平均电流可以选得很小</strong>（如图中选用的 8A），但其<strong>抗浪涌冲击电流（$I_{FSM}$）必须极大</strong>（可达几十甚至上百安培），同时需要具备极高的反向击穿耐压（通常在 1000V~1200V 级别）。</li>
+</ul>
+<h3 id="电流采样与栅极默认下拉"><a href="#电流采样与栅极默认下拉" class="headerlink" title="电流采样与栅极默认下拉"></a>电流采样与栅极默认下拉</h3><ul>
+<li><strong>电流取样电阻 (RA13)</strong>：由于串联在 MOS 管的源极（S）与地之间，当 MOS 管导通时，主电感 LA1 的电流流经 RA13。根据欧姆定律 $V_{IS} = I_L \cdot RA13$，将庞大的电感电流转化为毫伏级的电压信号供 DSP 的 ADC 采样。</li>
+<li><strong>栅极下拉电阻 (RA10)</strong>：与前面继电器控制电路的原理类似，为了防止控制器上电初始化期间输出引脚悬空，导致 MOS 管栅极积累静电而误导通，RA10 将栅极（G）强制下拉到地电位（0V）。</li>
+</ul>
+<h3 id="RCD-尖峰吸收电路-DA3-RA3-RA7-CA3-CA4"><a href="#RCD-尖峰吸收电路-DA3-RA3-RA7-CA3-CA4" class="headerlink" title="RCD 尖峰吸收电路 (DA3, RA3, RA7, CA3, CA4)"></a>RCD 尖峰吸收电路 (DA3, RA3, RA7, CA3, CA4)</h3><p>虽然 LLC 工作在软开关状态，但 PFC 的 MOS 管通常工作在硬开关模式。</p>
+<ul>
+<li><strong>尖峰的产生</strong>：当 MOS 管关断瞬间，主电路二极管 DA2 导通，D 点的宏观电位被钳位在 380V。但由于 PCB 走线和器件引脚存在不可避免的<strong>寄生电感（$L_p$）</strong>，这部分漏感能量无处释放，会与 MOS 管的<strong>寄生输出电容（$C_{oss}$）</strong>发生高频谐振。这会导致 D 点电压在上升沿出现极高的电压尖峰（远超 380V），极易击穿 MOS 管。</li>
+<li><strong>RCD 吸收过程</strong>：<ol>
+<li><strong>吸收尖峰</strong>：当 D 点电压超过 380V 时，吸收二极管 <strong>DA3 (ES2J)</strong> 正向导通，寄生电感的能量被转移并储存在电容 CA3、CA4 中，将 D 点尖峰死死钳位。</li>
+<li><strong>能量泄放</strong>：当 MOS 管下一次导通时，D 点电位降为 0V，DA3 截止。此时储存在 CA3、CA4 中的能量，会平缓地通过电阻 <strong>RA3, RA7</strong> 流入 380V 母线，被 CA1、CA2 吸收。</li>
+</ol>
+</li>
+<li><strong>电容串联的工程考量</strong>：吸收电路的高频充放电极为剧烈，电容容易热击穿。<strong>电容损坏失效时的常见表现是物理短路</strong>。如果只用一颗电容且发生短路，380V 母线就会直接倒灌。采用 CA3、CA4 <strong>两颗串联</strong>，即使其中一颗短路，另一颗依然能起到隔直流通交流的作用，极大地提升了系统的可靠性。</li>
+</ul>
+<hr>
+<h2 id="驱动电路设计与动态特性分析"><a href="#驱动电路设计与动态特性分析" class="headerlink" title="驱动电路设计与动态特性分析"></a>驱动电路设计与动态特性分析</h2><p>控制器（如 TI 28034）的 PWM 输出引脚通常仅能提供 3.3V 的逻辑高电平，且拉电流/灌电流能力极弱（约 10mA 级别）。而驱动功率 MOS 管需要克服极大的米勒平台，通常需要 <strong>12V~15V 的驱动电压</strong>和 <strong>2A~4A 的瞬间充放电电流</strong>。因此，必须引入独立的门极驱动芯片。</p>
+<p>本设计采用了 <strong>EG27324</strong> 双路低侧驱动芯片（仅使用其中一路）。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/PFC驱动电路.webp" alt="PFC驱动电路"></p>
+<h3 id="EG27324-引脚功能与选型匹配"><a href="#EG27324-引脚功能与选型匹配" class="headerlink" title="EG27324 引脚功能与选型匹配"></a>EG27324 引脚功能与选型匹配</h3><p>结合数据手册，EG27324 的核心特性完美匹配了数字电源的控制需求：<br><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/EG27324引脚.webp" alt="EG27324引脚"></p>
+<ul>
+<li><strong>电平转换能力</strong>：引脚 4 (<code>INB</code>) 前端接入 DSP 的 PWM 信号，芯片能够准确识别 3.3V 的高低逻辑电平；而其引脚 6 (<code>VDD</code>) 接入 12V 辅助电源，引脚 5 (<code>OUTB</code>) 输出的电压摆幅将完全跟随 VDD，达到 12V，满足 MOS 管的完全导通需求。</li>
+<li><strong>驱动电流能力</strong>：输出拉电流和灌电流可达 2A/2.5A，足以应对大功率 MOS 管的门极电容。</li>
+<li><strong>使能与保护引脚 (Pin 8: SD)</strong>：<code>SD</code> 为高电平有效的停机引脚。当 DSP 的硬件保护电路（如比较器模块 CMPSS）检测到过流或过压异常时，会立刻向 SD 发送高电平，强制将 <code>OUTA/OUTB</code> 拉低，不受 PWM 信号控制，实现纳秒级的封锁保护。</li>
+<li><strong>信号抗干扰 (CA6)</strong>：在 PWM 输入端加入了 330pF 的滤波电容。其容值必须选在 pF 级别，仅用于滤除线路上的毛刺干扰。如果容值过大，会将高频方波的边沿滤平，导致逻辑错误。</li>
+</ul>
+<h3 id="开关延迟-T-r-对平均电流采样的影响"><a href="#开关延迟-T-r-对平均电流采样的影响" class="headerlink" title="开关延迟 ($T_r$) 对平均电流采样的影响"></a>开关延迟 ($T_r$) 对平均电流采样的影响</h3><p>在 PFC 的数字控制中，芯片的开关时间特性（尤其是上升时间 $T_r$ 和开通延时 $T_{on}$）对算法采样精度有直接影响。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/EG27324开关延迟波形图.webp" alt="EG27324开关延迟波形图"></p>
+<ul>
+<li><strong>控制算法的采样逻辑</strong>：为了获取电感电流的平均值，DSP 的硬件 ADC 触发点通常配置在 PWM 计数器达到周期值（PRD）或零点（ZERO）的时刻，这在物理上对应着<strong>开关管导通时间的绝对中心点</strong>（此时的瞬态电流刚好等于电感平均电流）。</li>
+<li><strong>延迟引入的误差</strong>：如果驱动芯片的上升时间 $T_r$ 过大，会导致实际施加在 MOS 栅极上的方波相对于 DSP 内部的 PWM 计数器发生了时间偏移（Shift）。这种偏移会使得 ADC 采样点不再严格对齐电流三角波的物理中心。</li>
+<li><strong>误差评估</strong>：查阅手册可知，EG27324 的延迟在 80ns 左右。假设开关频率为 45kHz，一个完整周期为 $T_s = \frac{1}{45\text{kHz}} \approx 22.4\mu\text{s}$。80ns ($0.08\mu\text{s}$) 占比极小，引起的稳态电流采样误差完全在闭环 PI 调节器的纠偏能力范围之内。</li>
+</ul>
+<h3 id="栅极驱动电阻与“快速关断”电路"><a href="#栅极驱动电阻与“快速关断”电路" class="headerlink" title="栅极驱动电阻与“快速关断”电路"></a>栅极驱动电阻与“快速关断”电路</h3><p>MOS 管的栅极相当于一个电容，驱动的过程本质上就是对电容进行大电流充放电的过程。</p>
+<ul>
+<li><strong>驱动限流电阻 (RA14, RA15)</strong>：<br>当 <code>OUTB</code> 瞬间变为 12V 时，如果导线上没有电阻，瞬态充电电流 $I = \frac{U}{R}$ 将趋近于无穷大，瞬间烧毁驱动芯片内部的图腾柱。<br>为了将电流限制在 EG27324 的极限 2.5A 以内，理论上需要最小阻抗 $R_{min} = \frac{12\text{V}}{2.5\text{A}} = 4.8\Omega$。本设计采用了两颗 $4.7\Omega$ 贴片电阻组成网络，既起到了限流作用，又调节了开通速度（dV/dt），优化 EMI 表现。</li>
+<li><strong>快速关断加速网络 (QA3, SS8550)</strong>：<br>为了降低开关损耗，MOS 管在关断时越快越好。然而，如果仅靠驱动芯片拉低，放电电流必须原路经过 RA14 和 RA15 退回引脚 5，受到限流电阻的阻碍，关断过程会变得拖泥带水。<br>为此，引入了 <strong>PNP 晶体管 QA3</strong> 构成无源加速电路：<ol>
+<li>当 <code>OUTB</code> 输出 0V（关断命令）时，两个限流电阻的中间节点电压为6V。</li>
+<li>此时，MOS 管栅极（G_PFC）上仍残留着 12V 的高电压。</li>
+<li>对于 QA3（PNP管）而言，其发射极（E）接 12V，基极（B）接低电位6V，发射结正偏（$V_{eb} &gt; 0.7\text{V}$），三极管瞬间进入强饱和导通状态。</li>
+<li>QA3 的 CE 极直接将 MOS 管的栅极电容短路，电容被短路实现快速的放电，MOS实现了极其干脆的关断动作。</li>
+</ol>
+</li>
+</ul>
+<h1 id="PFC-信号调理电路分析"><a href="#PFC-信号调理电路分析" class="headerlink" title="PFC 信号调理电路分析"></a>PFC 信号调理电路分析</h1><p>在开关电源设计中，有一个业界普遍的共识：<strong>PFC 电路是“硬件简单，控制复杂”，而 LLC 电路是“硬件复杂，控制简单”</strong>。PFC 的控制之所以复杂，是因为它需要同时对输入电压（交流）、母线电压（高压直流）以及电感电流进行高频、高精度的实时采样与闭环计算。</p>
+<p>由于主功率电路中的输入输出都是几百伏的高电压，而后级 DSP 控制器（如 TMS320F28034）的 ADC 引脚能识别的电压范围通常被严格限制在 0V~3.3V。因此，控制器绝对不能直接连接主电路，必须通过<strong>信号调理电路</strong>，将高压、大电流按固定比例转换为适合控制器安全取样的低电压信号。</p>
+<hr>
+<h2 id="母线电压转换-VBUS-采样"><a href="#母线电压转换-VBUS-采样" class="headerlink" title="母线电压转换 (VBUS 采样)"></a>母线电压转换 (VBUS 采样)</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/母线电压转换.webp" alt="母线电压转换"></p>
+<p>母线电压（VBUS）正常运行时高达 380V，为了将其送入 DSP，我们使用了多个贴片电阻串联来进行分压降压。</p>
+<h3 id="分压比与余量设计"><a href="#分压比与余量设计" class="headerlink" title="分压比与余量设计"></a>分压比与余量设计</h3><ul>
+<li><strong>余量考量</strong>：为了获得较理想的采样电压值，应当合适选择分压电阻，使得母线电压在达到最大极限值时，信号调理后对应 DSP 采样的电压依然不超过 3.3V，否则会导致 ADC 饱和，造成采样丢失与控制失控。</li>
+<li><strong>参数设定</strong>：设计时必须留有余量。假设我们定义 3.3V 满量程对应母线绝对极限电压 450V，那么在正常额定工作点（380V）时，采样电压大约为量程的 0.8 倍。经过计算，分压网络在 VBUS 为 380V 时，RA19 左侧节点的电压恰好约为 2.6V（$3.3\text{V} \times 0.8 \approx 2.64\text{V}$）。</li>
+</ul>
+<h3 id="RC-低通滤波与无压降传输"><a href="#RC-低通滤波与无压降传输" class="headerlink" title="RC 低通滤波与无压降传输"></a>RC 低通滤波与无压降传输</h3><ul>
+<li><strong>RC 滤波原理</strong>：电阻 <strong>RA19</strong> (1kΩ) 与电容 <strong>CA9</strong> (1nF) 构成了一阶 RC 低通滤波器，其核心作用是滤除高频开关噪声干扰，确保进入 ADC 的直流电平平稳纯净。</li>
+<li><strong>为什么 RA19 上几乎没有压降？</strong> 很多初学者会疑惑，既然加了 1kΩ 的电阻 RA19，为什么左侧是 2.6V，右侧的 ADC_BUS 依然是 2.6V？这是因为 <strong>DSP 的 ADC 输入引脚属于极高阻抗状态（通常在兆欧级别以上）</strong>。根据欧姆定律 $U = I \times R$，由于流入 ADC 引脚的电流 $I$ 微乎其微（近乎为 0），电阻 RA19 两端产生的压降也就近乎为 0。因此，电压可以无损耗地传递过去。</li>
+</ul>
+<hr>
+<h2 id="输入电压转换-AC-采样"><a href="#输入电压转换-AC-采样" class="headerlink" title="输入电压转换 (AC 采样)"></a>输入电压转换 (AC 采样)</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/输入电压转换.webp" alt="输入电压转换"></p>
+<p>市电输入是正负交变的正弦波交流电，但 DSP 的 ADC 只能采集 0~3.3V 的正电压，无法直接读取负半周信号。</p>
+<h3 id="巧妙的差分对地取样"><a href="#巧妙的差分对地取样" class="headerlink" title="巧妙的差分对地取样"></a>巧妙的差分对地取样</h3><ul>
+<li>由于整个控制系统的地（PGND）位于整流桥之后的直流端，我们可以利用整流桥的单向导电特性来巧妙采样。</li>
+<li><strong>正半周</strong>：当输入交流电为正相时（ACL 电位高于 ACN），电流经整流桥流向母线，此时 ACL 对 PGND 的电压表现为实际输入电压的正弦波，而 ACN 被整流桥钳位在 PGND，电压为 0。</li>
+<li><strong>负半周</strong>：当输入交流电为负相时（ACL 电位低于 ACN），ACN 对 PGND 的电压表现为实际输入电压的正弦波，而 ACL 对 PGND 的电压为 0。</li>
+</ul>
+<h3 id="软件重构与分压一致性"><a href="#软件重构与分压一致性" class="headerlink" title="软件重构与分压一致性"></a>软件重构与分压一致性</h3><ul>
+<li>硬件上，我们分别设计了两套完全独立但参数对称的分压电路，分别采集 <code>ADC_ACL</code> 和 <code>ADC_ACN</code>。</li>
+<li>在 DSP 软件算法中，将 <code>ADC_ACL</code> 减去 <code>ADC_ACN</code>，即可完美还原出完整的正负交流输入电压（数值上与实际输入电压成固定的分压缩小比例）。</li>
+<li><strong>工程细节</strong>：这里的电阻分压比通常设计得与母线电压（VBUS）的分压比完全一致，这样在软件标幺化计算和占空比前馈推导时，增益系数可以统一，极大地简化了控制代码。</li>
+</ul>
+<hr>
+<h2 id="MOS-电流转换与差分放大"><a href="#MOS-电流转换与差分放大" class="headerlink" title="MOS 电流转换与差分放大"></a>MOS 电流转换与差分放大</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/MOS电流转换.webp" alt="MOS电流转换"></p>
+<p>与几百伏的电压不同，电感电流转化后的电压信号是极小的微弱信号。例如，电感电流 10A 经过 $0.01\Omega$ 的取样电阻后，在 IS 端产生的电压仅仅只有 0.1V。直接将其送入 3.3V 量程的 ADC，分辨率极低，且很容易被环境噪声淹没，因此必须使用<strong>差分放大电路</strong>将其放大至适合 DSP 采样的电压范围。</p>
+<h3 id="放大倍数计算"><a href="#放大倍数计算" class="headerlink" title="放大倍数计算"></a>放大倍数计算</h3><ul>
+<li>设计中采用了双通道运放 <strong>MC33272ADR2G</strong> 的 B 通道 (UA2B) 构建差分放大器。</li>
+<li>已知 RA23 与 RA25 相等，RA22 与 RA27 相等，根据经典差分放大公式，该电路的放大增益为：<script type="math/tex; mode=display">K = \frac{RA22}{RA23} = \frac{2.2\text{k}\Omega}{100\Omega} = 22</script></li>
+</ul>
+<h3 id="避免运放“零偏”与偏置电路设计"><a href="#避免运放“零偏”与偏置电路设计" class="headerlink" title="避免运放“零偏”与偏置电路设计"></a>避免运放“零偏”与偏置电路设计</h3><ul>
+<li><strong>运放的零偏特性</strong>：即使是精密运放，在单电源供电下也存在输入失调，当输入信号接近 0V 时，输出可能会陷入死区或产生非线性失真，无法准确表达 0A 附近的微小电流。</li>
+<li><strong>偏置 (OFFSET) 的引入</strong>：为了避免这种失真，我们不让放大器的参考地直接接 PGND，而是为其提供一个正向偏置。利用 RA16 和 RA20 对 5V 电源分压，产生一个约 $0.877\text{V}$ 的基础偏压。</li>
+<li><strong>同相跟随器 (UA2A)</strong>：运放的 A 通道被接成电压跟随器模式，利用其“输入阻抗无穷大、输出阻抗趋近于零”的特性，将这个 0.877V 的基准电压“坚固”地传递给 <code>OFFSET</code> 网络，作为差分放大的“垫底”参考电平。</li>
+<li><strong>最终采样结果</strong>：假设流经 MOS 的电流为 1A，取样电阻压降为 0.01V，则输出到 ADC 的电压为：<script type="math/tex; mode=display">V_{ADC} = 1\text{A} \cdot 0.01\Omega \cdot 22 + 0.877\text{V} = 1.097\text{V}</script>这就意味着，当电流绝对为 0A 时，ADC 读到的并不是 0V，而是 0.877V。只要软件中将 0.877V 设定为电流零点，就能完美避开运放底部的非线性死区。</li>
+</ul>
+<h3 id="RC-低通滤波"><a href="#RC-低通滤波" class="headerlink" title="RC 低通滤波"></a>RC 低通滤波</h3><p>在放大电路输出端，同样增加了由 <strong>RA24</strong> ($330\Omega$) 和 <strong>CA10</strong> (1nF) 构成的 RC 低通滤波器。由于电感电流是高频三角波，含有大量的开关毛刺，该滤波器能有效平滑波形，避免后级 DSP 采样受到严重的高频开关噪声干扰。</p>
+<hr>
+<h2 id="放大器芯片关键参数解析-MC33272ADR2G"><a href="#放大器芯片关键参数解析-MC33272ADR2G" class="headerlink" title="放大器芯片关键参数解析 (MC33272ADR2G)"></a>放大器芯片关键参数解析 (MC33272ADR2G)</h2><p>在本设计中，运放选用单电源 5V 供电（引脚 8 接 P5V，引脚 4 接地）。为了保证采样的实时性与精度，芯片的几个关键电气特性尤为重要：</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/放大器芯片.webp" alt="放大器芯片"><br><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/放大器芯片2.webp" alt="放大器芯片2"></p>
+<ul>
+<li><strong>输入失调电压 (Input Offset Voltage)</strong>：<br>数据手册显示，该芯片在室温下的典型失调电压仅为 <strong>0.1mV</strong>。这是一个非常优秀的指标。假设失调电压很大，当取样电阻上的电压低至 0.1mV 级别时，运放本身就会把真实信号和误差混淆，导致轻载或过零点时电流波形发生严重畸变。</li>
+<li><strong>压摆率 (Slew Rate, SR)</strong>：<br>压摆率代表了运放输出电压跳变的最快速度，手册标称为 <strong>$10\text{V}/\mu\text{s}$</strong>（即每微秒能上升 10V）。<br><em>如何评估它是否够用？</em> 我们的 PFC 开关频率为 45kHz，意味着一个完整周期长达 $22.2\mu\text{s}$。电感电流在这个周期内呈三角波缓慢上升和下降，放大后的电压变化幅度最大也就 $3.3\text{V}$ 左右。要在十多微秒内跟随 3V 左右的电压变化，哪怕压摆率只有 $1\text{V}/\mu\text{s}$ 都绰绰有余，因此 $10\text{V}/\mu\text{s}$ 的 SR 保证了对高频电流包络的完美无延迟跟踪。</li>
+</ul>
+<hr>
+<h2 id="PFC-控制板接口"><a href="#PFC-控制板接口" class="headerlink" title="PFC 控制板接口"></a>PFC 控制板接口</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/PFC控制板接口.webp" alt="PFC控制板接口"></p>
+<p>所有经过精密调理的低压模拟信号（包括 <code>ADC_BUS</code>、<code>ADC_ACL</code>、<code>ADC_ACN</code>、<code>ADC_IMOS</code>）最终统一汇集至接口座 <strong>JA3</strong>。而保护驱动与通信信号（如 <code>Relay</code> 继电器控制、<code>PWM1A_DRI</code> 驱动脉冲、SCI 串口收发）则汇集于 <strong>JA2</strong>。</p>
+<p>控制板通过这两个排针接口直接扣在主功率板上，接收经过“提纯”的安全电压信号，并根据算法输出高速 PWM 驱动脉冲，指挥前文分析的驱动电路，从而完成整个 PFC 系统的闭环运作。</p>
+<h1 id="LLC-主电路与驱动电路分析"><a href="#LLC-主电路与驱动电路分析" class="headerlink" title="LLC 主电路与驱动电路分析"></a>LLC 主电路与驱动电路分析</h1><p>LLC 谐振变换器的主功率电路是实现高效 DC-DC 转换的核心，而其隔离驱动电路则是保障高压侧与低压控制侧安全、精准互动的关键桥梁。本章将结合硬件原理图，对 LLC 的主功率级和基于 SI8233BD 的隔离驱动网络进行深度剖析。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC主功率电路.webp" alt="LLC主功率电路"></p>
+<hr>
+<h2 id="LLC-主功率电路关键元器件解析"><a href="#LLC-主功率电路关键元器件解析" class="headerlink" title="LLC 主功率电路关键元器件解析"></a>LLC 主功率电路关键元器件解析</h2><h3 id="谐振网络设计-CA14-CA15-LA3"><a href="#谐振网络设计-CA14-CA15-LA3" class="headerlink" title="谐振网络设计 (CA14, CA15, LA3)"></a>谐振网络设计 (CA14, CA15, LA3)</h3><ul>
+<li><strong>谐振电容的并联处理</strong>：前文计算得出的理想谐振电容值为 19.7nF。在实际电路中，使用了 <strong>两颗 10nF/630V 的电容（CA14, CA15）并联</strong> 来代替单颗电容。这样做的目的是让多颗电容均流，分摊巨大的高频谐振电流，避免单颗电容发热严重而失效。</li>
+<li><strong>谐振电感测试端子 (CNTA6, CNTA7)</strong>：这两个端子在正常运行时是用导线物理短接的。在研发调试时，可以断开这根线，串入高频霍尔电流探头，从而直观地测量和观察 LLC 谐振电流的真实波形。副边的 CNTA8 和 CNTA9 同理，用于测量变压器副边电流。</li>
+</ul>
+<h3 id="副边整流与输出网络-DA5-DA6-CA18-CA22"><a href="#副边整流与输出网络-DA5-DA6-CA18-CA22" class="headerlink" title="副边整流与输出网络 (DA5, DA6, CA18~CA22)"></a>副边整流与输出网络 (DA5, DA6, CA18~CA22)</h3><ul>
+<li><strong>整流二极管</strong>：选用的器件型号为 <strong>VS-MUR3020WT-N3</strong>。虽然图中 DA5 显示为两个二极管的符号，但这实际上是因为该型号器件<strong>内部封装了两个共阴极的快恢复二极管</strong>，正好完美契合中心抽头全波整流的拓扑结构。</li>
+<li><strong>输出滤波电容</strong>：系统额定输出电压约为 48V，因此电容耐压值选取了留有余量的 <strong>63V</strong> 规格。使用多颗 470uF 电容并联（CA18-22, CA57），可以最大程度降低输出电容阵列的等效串联电阻（ESR），有效压制输出电压的开关纹波噪声，同时分摊高频纹波电流，防止电容过热爆炸。</li>
+<li><strong>共模抑制电容 (CY4, CY5)</strong>：副边的高频整流二极管在极速开关时会产生共模干扰电流。CY4 和 CY5 跨接在输出端与大地之间，为这些高频共模噪声提供了一条流入大地（机壳）的极低阻抗泄放回路。</li>
+</ul>
+<h3 id="取样、保护与接地设计"><a href="#取样、保护与接地设计" class="headerlink" title="取样、保护与接地设计"></a>取样、保护与接地设计</h3><ul>
+<li><strong>强制下拉电阻 (RA38, RA39, RA44, RA45)</strong>：阻值为 10kΩ。它的作用是当系统刚刚插上电、辅助电源还没来得及建立驱动信号时，强制将 MOS 管的栅极（G）电位拉低至 0V，防止 MOS 管因静电或浮空乱序导通而炸机。</li>
+<li><strong>谐振电流过流保护 (TA2)</strong>：采用匝数比为 <strong>300:1</strong> 的电流互感器（CT）。当后级电路发生短路异常，导致谐振电流瞬间飙升至（例如 10A）时，互感器副边感应出 $10\text{A} / 300 \approx 33.3\text{mA}$ 的缩小电流。在 CT1 和 CT2 之间并联一个取样电阻，就能将这个按比例缩小的危险电流信号转化为电压信号，送入保护电路触发硬件关断。</li>
+<li><strong>输出电流取样 (RA42)</strong>：使用 $0.001\Omega$ 的精密检流电阻。假如输出电流为 10A，根据 $U = I \times R$，在 RA42 两端（SC+ 和 SC-）会产生 10mV 的微小压降。后级的信号调理电路会捕捉这个微弱差分电压并将其放大，供 DSP 进行闭环控制和显示。</li>
+<li><strong>假负载 (RA40, RA41)</strong>：这两个 10kΩ 的电阻跨接在输出端。它们不仅能在电源关机下电后快速消耗掉输出大电容中残留的致命能量，还能确保输出端不会处于绝对空载状态，有利于 LLC 在极轻载条件下的稳压控制。</li>
+<li><strong>PGND 与 SGND 的隔离与连接 (RA43)</strong>：<ul>
+<li><strong>PGND (Primary Ground)</strong>：原边地（初级地/强电地）。</li>
+<li><strong>SGND (Secondary Ground)</strong>：副边地（次级地/弱电地）。<br>原边和副边必须通过主变压器进行电气隔离以保证用电安全。由于 DSP 控制板放置在副边，它可以直接共用副边地（SGND）去安全、精准地采样输出电压和输出电流。图中的 RA43 ($0\Omega$) 代表主输出的地和控制板的弱电地在物理上单点连接共地。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>💡 进阶思考：为什么 PFC 有 RCD 尖峰吸收电路，而 LLC 没有？</strong><br>PFC 电路通常工作在硬开关状态，关断时会产生极高的电压尖峰，必须使用 RCD 吸收。而 LLC 的核心优势就在于它能实现<strong>零电压开通（ZVS）</strong>。在死区时间内，谐振电流会抽干 MOS 管寄生结电容上的电荷，使其漏源极电压平稳降为 0。因此，大部分情况下 LLC 不需要额外的 RCD 吸收电路（如果为了极致求稳，也可以在 D、S 两极之间并联一个小瓷片电容来辅助吸收）。</p>
+</blockquote>
+<h3 id="💡-深度解惑：为什么必须区分-PGND-和-SGND？两边能不能共用一个地？"><a href="#💡-深度解惑：为什么必须区分-PGND-和-SGND？两边能不能共用一个地？" class="headerlink" title="💡 深度解惑：为什么必须区分 PGND 和 SGND？两边能不能共用一个地？"></a>💡 深度解惑：为什么必须区分 PGND 和 SGND？两边能不能共用一个地？</h3><p>在电路图中，我们明确区分了 <strong>PGND（Primary Ground，原边地/初级地）</strong> 和 <strong>SGND（Secondary Ground，副边地/次级地）</strong>。这两个地在物理上是被变压器和隔离芯片严格隔开的，<strong>绝对不能直接连在一起</strong>。主要基于以下三大核心原因：</p>
+<p><strong>1. 安规要求与人身绝对安全（最重要的一点）</strong></p>
+<ul>
+<li><strong>PGND 的危险性</strong>：PGND 是直接与 220V 交流市电以及 380V 高压母线连通的“热地（Hot Ground）”。如果人手触碰到 PGND 或者原边的任何走线，会直接形成对大地的导电回路，发生致命的触电事故。</li>
+<li><strong>SGND 的安全性</strong>：SGND 是输出端的“冷地（Cold Ground）”，连接着最终的负载设备（也就是用户能接触到的部分）。</li>
+<li>如果将 PGND 和 SGND 短接，高压市电就会毫无阻拦地窜入输出端。不仅不符合任何国际安规认证（如 IEC 62368 等），还会使得输出端的 48V 带有对地的几百伏高压，极度危险。</li>
+</ul>
+<p><strong>2. 隔绝毁灭性的高频地弹干扰 (Ground Bounce)</strong></p>
+<ul>
+<li>原边电路包含了 PFC 和 LLC 的 MOS 管，这些开关管在以几十 kHz 的频率切断和导通高达十几安培的电流，在 PGND 上会产生极其恐怖的高频噪声和电压尖峰（地弹效应）。</li>
+<li>控制板的核心是 DSP 芯片，其工作电压只有脆弱的 3.3V，ADC 的采样精度在毫伏级别。如果 DSP 的地与 PGND 连在一起，这种强烈的地噪声会瞬间淹没所有的微小采样信号，导致芯片逻辑死机、复位甚至直接烧毁。通过变压器物理隔离，能确保 SGND 是一个绝对纯净、安静的基准参考点。</li>
+</ul>
+<p><strong>3. 控制架构的最优解：为什么把控制板放在 SGND 这边？</strong></p>
+<ul>
+<li>虽然原边和副边必须隔离，但我们的大脑（DSP 控制板）必须选择放在其中一边。</li>
+<li><strong>放在原边（PGND）的劣势</strong>：如果把控制板放在原边，想要精准控制输出电压 $V_{out}$ 和输出电流 $I_{out}$，就必须使用极其昂贵的线性光耦或隔离放大器把副边的模拟信号传回来，这会导致采样精度大幅下降，且环路响应变慢。</li>
+<li><strong>放在副边（SGND）的优势</strong>：开关电源的核心目的是<strong>稳压输出</strong>。把控制板放在副边（SGND），DSP 就可以直接、无损、零延迟地对输出电压和电流进行高精度差分取样。而对于原边的控制，DSP 只需要把计算好的数字 PWM 方波，通过隔离驱动芯片（如本文中的 SI8233BD）扔到原边去控制 MOS 管即可。<strong>“隔离数字控制信号”远比“隔离模拟采样信号”要简单、便宜且精准得多。</strong></li>
+</ul>
+<hr>
+<h2 id="隔离驱动电路-SI8233BD-分析"><a href="#隔离驱动电路-SI8233BD-分析" class="headerlink" title="隔离驱动电路 (SI8233BD) 分析"></a>隔离驱动电路 (SI8233BD) 分析</h2><p>因为 LLC 的 MOS 管位于原边（PGND），而控制板位于副边（SGND），PWM 控制波形必须跨越隔离带。因此，驱动芯片不仅要提供足够的驱动电流，还必须具备高压隔离能力。</p>
+<p>本设计选用的是 Silicon Labs 的 <strong>SI8233BD-D-IS</strong> 隔离型互补双通道驱动 IC。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/SI8233BD.webp" alt="SI8233BD"><br><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/SI8233BD隔离.webp" alt="SI8233BD隔离"></p>
+<h3 id="芯片特性与关键参数"><a href="#芯片特性与关键参数" class="headerlink" title="芯片特性与关键参数"></a>芯片特性与关键参数</h3><ul>
+<li><strong>原副边高压隔离</strong>：芯片内部上下半部分的驱动是物理隔离的。左侧（控制端）接弱电地，右侧（功率端）分成了 GNDA 和 GNDB 两个独立的参考地。原副边设计耐压要求通常在 1500V 以上，而该芯片的绝缘耐压高达 <strong>5kV</strong>，完全满足安规要求。</li>
+<li><strong>驱动能力</strong>：提供高达 <strong>4.0A</strong> 的峰值输出电流，保证大功率 MOS 管能够极速充放电导通。</li>
+<li><strong>欠压保护 (UVLO)</strong>：当芯片检测到辅助供电电源（如 P12V）的电压下降到 8V 以下时，芯片会自动封锁输出保护。因为如果驱动电压过低，MOS 管就无法完全进入饱和导通区，导通电阻（$R_{DS_on}$）会急剧增大，导致 MOS 管严重发热甚至烧毁。</li>
+</ul>
+<h3 id="引脚功能定义"><a href="#引脚功能定义" class="headerlink" title="引脚功能定义"></a>引脚功能定义</h3><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/SI8233BD引脚.webp" alt="SI8233BD引脚"></p>
+<ul>
+<li><strong>VIA, VIB</strong>：A 路与 B 路的逻辑 PWM 输入端。</li>
+<li><strong>VOA, VOB</strong>：A 路（上管）与 B 路（下管）的功率驱动输出端。</li>
+<li><strong>VDDI / GNDI</strong>：左侧控制输入端的 5V 供电电源与地。</li>
+<li><strong>VDDA / GNDA</strong>：右侧 A 路（高位管）的供电电源与浮地。</li>
+<li><strong>VDDB / GNDB</strong>：右侧 B 路（低位管）的供电电源与地。</li>
+<li><strong>DISABLE</strong>：使能控制引脚（类似前文的 SD 端）。当输入高电平（1）时，芯片强行关断输出；本设计中将其永久接地（0），表示驱动器始终处于使能工作状态。</li>
+<li><strong>DT (Dead Time, 死区时间)</strong>：全桥拓扑最忌讳“直通”（即同一桥臂的上下两个 MOS 管同时导通，导致 380V 母线瞬间对地短路炸机）。DT 引脚通过外接电阻到地，能在芯片硬件底层强制注入死区时间。即便是软件跑飞导致 PWMA 和 PWMB 信号发生重叠，DT 也能在物理层面防范直通事故。</li>
+</ul>
+<hr>
+<h2 id="自举驱动原理深度解析"><a href="#自举驱动原理深度解析" class="headerlink" title="自举驱动原理深度解析"></a>自举驱动原理深度解析</h2><p>以下半桥（QA4 和 QA6）的驱动电路为例，下管（QA6）的源极直接接地（PGND），用 12V 供电驱动毫无问题。但上管（QA4）的源极悬浮在半桥中点（HS-1），该点的电位是一直在 0V 和 380V 之间疯狂跳变的。</p>
+<p>为了让上管开通，栅极（G1）的电压必须比源极（HS-1）高出 12V，也就是说，当 HS-1 为 380V 时，G1 必须达到 392V！然而，我们的辅助电源（P12V）只有绝对的 12V。为了解决这个“凭空拔高”的电压难题，电路中引入了由 <strong>自举二极管 (DA7)</strong> 和 <strong>自举电容 (CA28)</strong> 组成的“自举驱动网络”（Bootstrap Circuit）。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC驱动电路.webp" alt="LLC驱动电路"></p>
+<p><strong>自举升压的动态物理过程：</strong></p>
+<ol>
+<li><p><strong>充电阶段（下管导通，上管关断）</strong>：<br>当控制下管（QA6）导通时，半桥中点 <strong>HS-1 的电位被强行拉低到 0V</strong>。<br>此时，辅助电源 P12V（12V）的高电位顺着自举二极管 <strong>DA7</strong>（正向导通），源源不断地流入自举电容 <strong>CA28</strong> 中。<br>由于电容的右侧连接在 0V 的 HS-1 上，经过极短的时间，电容 CA28 充满电，其两端形成了稳定的电势差：左侧为 12V，右侧为 0V。在这个阶段，CA28 就像一块被充满了 12V 电量的悬浮小电池。</p>
+</li>
+<li><p><strong>升压阶段（下管关断，上管导通）</strong>：<br>接下来，下管关闭，上管（QA4）准备导通。<br>当半桥中点 <strong>HS-1 的电位瞬间跃升至 380V 母线电压</strong>时，神奇的现象发生了：<br>因为电容两端的电压差不能突变（电容保留着 12V 的能量），当它的右极板（参考地）被整体抬升到 380V 时，它的左极板电压就会水涨船高，瞬间被抬举到 $380\text{V} + 12\text{V} = 392\text{V}$！<br>与此同时，这个 392V 的高压会试图倒灌回辅助电源，但此时<strong>自举二极管 DA7 承受反向偏压（左边 12V，右边 392V），瞬间截止关断</strong>，死死地拦住了电流回流。</p>
+</li>
+<li><p><strong>驱动阶段</strong>：<br>此时，这块飘在 380V 高空的“悬浮电池（CA28）”，通过驱动芯片 SI8233BD 的内部开关，瞬间将 引脚VDDA上的392V 的电压施加在上管的栅极（G1）上。<br>由于上管源极（S）是 380V，栅极（G1）是 392V，相对驱动电压 $V_{GS} = 392\text{V} - 380\text{V} = 12\text{V}$，完美满足了 MOS 管的开通条件。整个电路就这样通过“自举”的方式，巧妙地利用一个 12V 电源完成了 392V 的高压浮地驱动。</p>
+</li>
+</ol>
+<h1 id="LLC-信号调理电路分析"><a href="#LLC-信号调理电路分析" class="headerlink" title="LLC 信号调理电路分析"></a>LLC 信号调理电路分析</h1><p>LLC 谐振变换器的核心控制目标是实现<strong>输出电压</strong>和<strong>输出电流</strong>的精准调节。因此，在副边控制架构中，信号调理电路的首要任务是对这两个关键物理量进行采样。</p>
+<h2 id="输出电压与输出电流采样"><a href="#输出电压与输出电流采样" class="headerlink" title="输出电压与输出电流采样"></a>输出电压与输出电流采样</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC输出电压采样.webp" alt="LLC输出电压采样"></p>
+<ul>
+<li><strong>输出电压采样</strong>：采用经典的电阻分压网络（RA70、RA72），将最高 48V 的输出高压按固定比例降压至 3.3V 以内，再经过 RC 低通滤波器（RA71、CA40）滤除高频开关纹波，最终得到平稳的直流电压信号 <code>ADC_VOUT</code> 送入 DSP。</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC输出电流采样.webp" alt="LLC输出电流采样"></p>
+<ul>
+<li><strong>输出电流采样</strong>：通过高精密电流检流电阻将输出电流转换为微弱电压后，送入隔离运放（UA5B）构成的标准差分放大电路进行放大（放大倍数 50 倍）。</li>
+<li><strong>运放支撑电容</strong>：在运放的 5V 供电引脚（引脚 8）旁边，特意就近放置了一颗支撑滤波电容（CA34），其核心目的是为了保持运放供电的绝对干净，防止电源线上的高频噪声耦合进运放内部干扰电流采样。</li>
+</ul>
+<hr>
+<h2 id="输出目标电压调节-电位器采样"><a href="#输出目标电压调节-电位器采样" class="headerlink" title="输出目标电压调节 (电位器采样)"></a>输出目标电压调节 (电位器采样)</h2><p>本设计的电源支持输出电压在 <strong>24V 到 48V 之间连续可调</strong>。为了实现这一功能，引入了 VADJ 电位器转换采样电路。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC输出电位器转换采样.webp" alt="LLC输出电位器转换采样"></p>
+<ul>
+<li><strong>VADJ 电位器</strong>：这里的 <code>VADJ</code> 端口连接着一个放置在另外一块控制面板上的可调电阻（电位器）。</li>
+<li><strong>控制逻辑</strong>：DSP 通过采集 <code>ADC_VADJ</code> 端口的电压值，来获知用户当前设定的目标输出电压。例如，当 DSP 读到该点电压为 1V 时，内部控制环路就将目标输出电压设定为 24V；读到 2V 时，就将目标输出电压设定为 48V。</li>
+<li><strong>强滤波设计</strong>：值得注意的是，这里的 RC 低通滤波器参数选得比较大。这是因为 <code>ADC_VADJ</code> 是整个电源闭环控制的“基准参考目标”，<strong>只有当参考电压足够稳固、没有任何波动时，闭环 PI 控制器才能将输出电压控制得更加精准平滑</strong>。</li>
+</ul>
+<hr>
+<h2 id="MOS-管与二极管温度采样"><a href="#MOS-管与二极管温度采样" class="headerlink" title="MOS 管与二极管温度采样"></a>MOS 管与二极管温度采样</h2><p>MOS 管和输出整流二极管都是系统中的发热大户。为了防止器件因过热而发生热击穿损坏，必须进行实时温度采样以实现过温保护（OTP）。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLCMOS温度采样.webp" alt="LLCMOS温度采样"></p>
+<ul>
+<li><strong>NTC 温度传感器</strong>：电路中使用了 <strong>RA68</strong> 和 <strong>RA69</strong> 两个 NTC（负温度系数）热敏电阻。它们的阻值会随着温度的升高而迅速下降。在物理结构上，这些传感器被紧紧贴在功率器件所在的散热器上。</li>
+<li><strong>参数解析</strong>：图中标识的 <code>10K</code> 代表该热敏电阻在标准室温（$25^\circ\text{C}$）下的标称阻值为 $10\text{k}\Omega$。</li>
+<li><strong>信号转换</strong>：3.3V 经过固定电阻（RA64）与 NTC 电阻分压后，得到的电压点 <code>DC_MOS_T</code> 就会随着温度的变化而实时改变。这里同样配置了较大的滤波电容，以保证采集到的温度数值平稳，防止误触发保护。</li>
+</ul>
+<blockquote>
+<p><strong>💡 进阶思考：为什么 LLC 需要单独做温度保护，而前面的 PFC 电路没有画温度保护？</strong><br>这是出于工程结构与成本优化的考量。在实际的 PCB 布局和结构设计中，LLC 的 MOS 管和 PFC 的 MOS 管距离非常近，通常紧贴并共用同一块大面积散热器。因此，整个散热器的温度梯度分布相差不大，<strong>系统只需要采集一个具有代表性的温度点</strong>，就能间接监控 PFC 和 LLC 所有功率器件的热状态。</p>
+</blockquote>
+<hr>
+<h2 id="LLC-谐振电流转电压采样-过流保护-OCP"><a href="#LLC-谐振电流转电压采样-过流保护-OCP" class="headerlink" title="LLC 谐振电流转电压采样 (过流保护 OCP)"></a>LLC 谐振电流转电压采样 (过流保护 OCP)</h2><p>原边谐振电流的采样主要用于<strong>硬件级的极速过流保护（OCP）</strong>。当后级电路发生短路等严重异常时，谐振电流会瞬间飙升，此时必须立即封锁 PWM 驱动。</p>
+<p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/LLC谐振电流转电压采样.webp" alt="LLC谐振电流转电压采样"></p>
+<ul>
+<li><strong>为什么不用取样电阻，而用电流互感器 (CT)?</strong><br>因为原边的主功率电路属于高压强电地（PGND），而控制板的采样端口属于弱电地（SGND）。如果直接串联电阻，高压会直接击穿控制板。<strong>电流互感器本身就具备天然的磁隔离特性</strong>。本设计中，原边谐振导线穿过互感器磁芯（相当于原边只有 1 匝），副边绕制了 300 匝，形成 <strong>300:1</strong> 的降流变比。</li>
+<li><strong>全波整流桥 (DA9~DA12)</strong>：<br>原边流过的是高频正弦交流电，互感器副边感应出的也是交流电流。为了让只能识别单向电压的 DSP ADC 端口进行处理，必须先通过 4 颗二极管构成的整流桥，将交流电翻转成单向的脉动直流（馒头波）。</li>
+<li><strong>电流转电压 (RA57)</strong>：<br>电流互感器的副边本质上相当于一个<strong>电流源</strong>，但 DSP 控制器需要读取的是<strong>电压信号</strong>。因此，在整流桥的输出端并联了一颗 $100\Omega$ 的取样电阻 <strong>RA57</strong>，其作用是利用欧姆定律，得到一个与谐振电流成正比的电压信号。旁边的电容 CA35 则用于滤除高频毛刺。</li>
+<li><strong>计算实例分析</strong>：<br>假设发生异常，原边谐振电流峰值瞬间达到了 3A 的正弦电流。<br>经过 300:1 的互感器缩小后，流过 CT1 和 CT2 端口的副边电流为 $3\text{A} / 300 = 10\text{mA}$ 的“馒头波”。<br>这个 10mA 的电流全部流经 $100\Omega$ 的电阻 RA57，在 <code>OCP</code> 测试点上产生的电压峰值为：<script type="math/tex; mode=display">V_{OCP} := 10\text{mA} \cdot 100\Omega = 1\text{V}</script>这个峰值为 1V 的馒头波电压信号送入 DSP 内部的模拟比较器（CMPSS），一旦触发设定的阈值，就会瞬间切断驱动。</li>
+</ul>
+<hr>
+<h2 id="控制板接口汇流"><a href="#控制板接口汇流" class="headerlink" title="控制板接口汇流"></a>控制板接口汇流</h2><p><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/硬件电路原理图分析/PLC控制板接口.webp" alt="PLC控制板接口"></p>
+<p>所有位于副边、经过上述电路精心“调理、滤波、降压”后的安全模拟电压信号：</p>
+<ul>
+<li><code>ADC_VOUT</code> (输出电压)</li>
+<li><code>ADC_IOUT</code> (输出电流)</li>
+<li><code>ADC_VADJ</code> (电位器目标设定值)</li>
+<li><code>DC_MOS_T</code> (温度)</li>
+<li><code>OCP</code> (原边谐振过流信号)</li>
+</ul>
+<p>最终都会整齐地汇集到 <strong>JA6</strong> 接口排针上，连同 <strong>JA5</strong> 上的驱动信号（<code>PWM1A</code>, <code>PWM1B</code>）和通信信号，一起送入扣接在主板上的 DCDC 核心控制板，完成整个 LLC 系统的大闭环神经中枢连接。</p>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/media/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90.webp" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">全桥LLC主功率电路计算</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/1.webp" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">one by one</div><div class="author-info__description">存放个人信息</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Xiaoxigroup-official"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:xiaoxigroup@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://github.com/Xiaoxigroup-official" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="https://space.bilibili.com/648180550" target="_blank" title="哔哩哔哩"><i class="fab fa-bilibili"></i></a><a class="social-icon" href="https://www.douyin.com/user/MS4wLjABAAAA95ZDIzp8YxKJcC2up8fRLGZ8MJywFewKogjisb4PW5k?from_tab_name=main&amp;showSubTab=compilation" target="_blank" title="抖音"><i class="fab fa-tiktok"></i></a><a class="social-icon" href="https://www.xiaohongshu.com/user/profile/5ed24d67000000000101c7f7" target="_blank" title="小红书"><i class="fas fa-book"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#EMI-%E5%8F%8A%E4%BF%9D%E6%8A%A4%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">EMI 及保护电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%8E%A5%E5%8F%A3%E4%B8%8E%E4%BF%9D%E9%99%A9%E4%B8%9D%E9%80%89%E5%9E%8B-FA1"><span class="toc-number">1.1.</span> <span class="toc-text">输入接口与保险丝选型 (FA1)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E6%A8%A1%E5%B9%B2%E6%89%B0%E4%B8%8E-X-%E7%94%B5%E5%AE%B9%E9%80%89%E5%9E%8B-CX1-CX2"><span class="toc-number">1.2.</span> <span class="toc-text">差模干扰与 X 电容选型 (CX1, CX2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B1%E6%A8%A1%E5%B9%B2%E6%89%B0%E3%80%81Y-%E7%94%B5%E5%AE%B9%E4%B8%8E%E5%85%B1%E6%A8%A1%E7%94%B5%E6%84%9F-CY1-CY2-CY3-LA2"><span class="toc-number">1.3.</span> <span class="toc-text">共模干扰、Y 电容与共模电感 (CY1, CY2, CY3, LA2)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%8B%E6%95%8F%E7%94%B5%E9%98%BB%E9%80%89%E5%9E%8B-RA6"><span class="toc-number">1.4.</span> <span class="toc-text">压敏电阻选型 (RA6)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8%E6%B5%AA%E6%B6%8C%E6%8A%91%E5%88%B6%E4%B8%8E%E7%BB%A7%E7%94%B5%E5%99%A8%E6%8E%A7%E5%88%B6%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">启动浪涌抑制与继电器控制电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AA%E6%B6%8C%E7%94%B5%E6%B5%81%E7%9A%84%E4%BA%A7%E7%94%9F%E4%B8%8E-RA1-%E7%9A%84%E6%8A%91%E5%88%B6%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.</span> <span class="toc-text">浪涌电流的产生与 RA1 的抑制作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E7%94%B5%E5%99%A8-JKA1-%E7%9A%84%E6%97%81%E8%B7%AF%E6%9C%BA%E5%88%B6"><span class="toc-number">2.2.</span> <span class="toc-text">继电器 (JKA1) 的旁路机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E7%94%B5%E5%99%A8%E5%BA%95%E5%B1%82%E6%8E%A7%E5%88%B6%E4%B8%8E%E4%BF%9D%E6%8A%A4%E7%94%B5%E8%B7%AF%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="toc-number">2.3.</span> <span class="toc-text">继电器底层控制与保护电路深度解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PFC-%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E4%B8%8E%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E6%B7%B1%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">PFC 主功率电路与驱动电路深度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PFC-%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E5%8F%8A%E5%85%B3%E9%94%AE%E5%85%83%E5%99%A8%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="toc-number">3.1.</span> <span class="toc-text">PFC 主功率电路及关键元器件解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%B5%8B%E8%AF%95%E6%8E%A5%E5%8F%A3%E4%B8%8E%E6%94%BE%E7%94%B5%E7%BD%91%E7%BB%9C"><span class="toc-number">3.1.1.</span> <span class="toc-text">物理测试接口与放电网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E6%B5%AA%E6%B6%8C%E6%97%81%E8%B7%AF%E4%BA%8C%E6%9E%81%E7%AE%A1-DA1"><span class="toc-number">3.1.2.</span> <span class="toc-text">防浪涌旁路二极管 (DA1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E6%B5%81%E9%87%87%E6%A0%B7%E4%B8%8E%E6%A0%85%E6%9E%81%E9%BB%98%E8%AE%A4%E4%B8%8B%E6%8B%89"><span class="toc-number">3.1.3.</span> <span class="toc-text">电流采样与栅极默认下拉</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RCD-%E5%B0%96%E5%B3%B0%E5%90%B8%E6%94%B6%E7%94%B5%E8%B7%AF-DA3-RA3-RA7-CA3-CA4"><span class="toc-number">3.1.4.</span> <span class="toc-text">RCD 尖峰吸收电路 (DA3, RA3, RA7, CA3, CA4)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8A%A8%E6%80%81%E7%89%B9%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">驱动电路设计与动态特性分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#EG27324-%E5%BC%95%E8%84%9A%E5%8A%9F%E8%83%BD%E4%B8%8E%E9%80%89%E5%9E%8B%E5%8C%B9%E9%85%8D"><span class="toc-number">3.2.1.</span> <span class="toc-text">EG27324 引脚功能与选型匹配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%85%B3%E5%BB%B6%E8%BF%9F-T-r-%E5%AF%B9%E5%B9%B3%E5%9D%87%E7%94%B5%E6%B5%81%E9%87%87%E6%A0%B7%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="toc-number">3.2.2.</span> <span class="toc-text">开关延迟 ($T_r$) 对平均电流采样的影响</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%85%E6%9E%81%E9%A9%B1%E5%8A%A8%E7%94%B5%E9%98%BB%E4%B8%8E%E2%80%9C%E5%BF%AB%E9%80%9F%E5%85%B3%E6%96%AD%E2%80%9D%E7%94%B5%E8%B7%AF"><span class="toc-number">3.2.3.</span> <span class="toc-text">栅极驱动电阻与“快速关断”电路</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PFC-%E4%BF%A1%E5%8F%B7%E8%B0%83%E7%90%86%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">PFC 信号调理电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%8D%E7%BA%BF%E7%94%B5%E5%8E%8B%E8%BD%AC%E6%8D%A2-VBUS-%E9%87%87%E6%A0%B7"><span class="toc-number">4.1.</span> <span class="toc-text">母线电压转换 (VBUS 采样)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%8E%8B%E6%AF%94%E4%B8%8E%E4%BD%99%E9%87%8F%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.1.1.</span> <span class="toc-text">分压比与余量设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RC-%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2%E4%B8%8E%E6%97%A0%E5%8E%8B%E9%99%8D%E4%BC%A0%E8%BE%93"><span class="toc-number">4.1.2.</span> <span class="toc-text">RC 低通滤波与无压降传输</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E7%94%B5%E5%8E%8B%E8%BD%AC%E6%8D%A2-AC-%E9%87%87%E6%A0%B7"><span class="toc-number">4.2.</span> <span class="toc-text">输入电压转换 (AC 采样)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A7%E5%A6%99%E7%9A%84%E5%B7%AE%E5%88%86%E5%AF%B9%E5%9C%B0%E5%8F%96%E6%A0%B7"><span class="toc-number">4.2.1.</span> <span class="toc-text">巧妙的差分对地取样</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E9%87%8D%E6%9E%84%E4%B8%8E%E5%88%86%E5%8E%8B%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">4.2.2.</span> <span class="toc-text">软件重构与分压一致性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MOS-%E7%94%B5%E6%B5%81%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%B7%AE%E5%88%86%E6%94%BE%E5%A4%A7"><span class="toc-number">4.3.</span> <span class="toc-text">MOS 电流转换与差分放大</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BE%E5%A4%A7%E5%80%8D%E6%95%B0%E8%AE%A1%E7%AE%97"><span class="toc-number">4.3.1.</span> <span class="toc-text">放大倍数计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%85%8D%E8%BF%90%E6%94%BE%E2%80%9C%E9%9B%B6%E5%81%8F%E2%80%9D%E4%B8%8E%E5%81%8F%E7%BD%AE%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.3.2.</span> <span class="toc-text">避免运放“零偏”与偏置电路设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RC-%E4%BD%8E%E9%80%9A%E6%BB%A4%E6%B3%A2"><span class="toc-number">4.3.3.</span> <span class="toc-text">RC 低通滤波</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%BE%E5%A4%A7%E5%99%A8%E8%8A%AF%E7%89%87%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90-MC33272ADR2G"><span class="toc-number">4.4.</span> <span class="toc-text">放大器芯片关键参数解析 (MC33272ADR2G)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PFC-%E6%8E%A7%E5%88%B6%E6%9D%BF%E6%8E%A5%E5%8F%A3"><span class="toc-number">4.5.</span> <span class="toc-text">PFC 控制板接口</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LLC-%E4%B8%BB%E7%94%B5%E8%B7%AF%E4%B8%8E%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">LLC 主电路与驱动电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#LLC-%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E5%85%B3%E9%94%AE%E5%85%83%E5%99%A8%E4%BB%B6%E8%A7%A3%E6%9E%90"><span class="toc-number">5.1.</span> <span class="toc-text">LLC 主功率电路关键元器件解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B0%90%E6%8C%AF%E7%BD%91%E7%BB%9C%E8%AE%BE%E8%AE%A1-CA14-CA15-LA3"><span class="toc-number">5.1.1.</span> <span class="toc-text">谐振网络设计 (CA14, CA15, LA3)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%AF%E8%BE%B9%E6%95%B4%E6%B5%81%E4%B8%8E%E8%BE%93%E5%87%BA%E7%BD%91%E7%BB%9C-DA5-DA6-CA18-CA22"><span class="toc-number">5.1.2.</span> <span class="toc-text">副边整流与输出网络 (DA5, DA6, CA18~CA22)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%96%E6%A0%B7%E3%80%81%E4%BF%9D%E6%8A%A4%E4%B8%8E%E6%8E%A5%E5%9C%B0%E8%AE%BE%E8%AE%A1"><span class="toc-number">5.1.3.</span> <span class="toc-text">取样、保护与接地设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%A1-%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%83%91%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%85%E9%A1%BB%E5%8C%BA%E5%88%86-PGND-%E5%92%8C-SGND%EF%BC%9F%E4%B8%A4%E8%BE%B9%E8%83%BD%E4%B8%8D%E8%83%BD%E5%85%B1%E7%94%A8%E4%B8%80%E4%B8%AA%E5%9C%B0%EF%BC%9F"><span class="toc-number">5.1.4.</span> <span class="toc-text">💡 深度解惑：为什么必须区分 PGND 和 SGND？两边能不能共用一个地？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9A%94%E7%A6%BB%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF-SI8233BD-%E5%88%86%E6%9E%90"><span class="toc-number">5.2.</span> <span class="toc-text">隔离驱动电路 (SI8233BD) 分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8A%AF%E7%89%87%E7%89%B9%E6%80%A7%E4%B8%8E%E5%85%B3%E9%94%AE%E5%8F%82%E6%95%B0"><span class="toc-number">5.2.1.</span> <span class="toc-text">芯片特性与关键参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E8%84%9A%E5%8A%9F%E8%83%BD%E5%AE%9A%E4%B9%89"><span class="toc-number">5.2.2.</span> <span class="toc-text">引脚功能定义</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E4%B8%BE%E9%A9%B1%E5%8A%A8%E5%8E%9F%E7%90%86%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90"><span class="toc-number">5.3.</span> <span class="toc-text">自举驱动原理深度解析</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LLC-%E4%BF%A1%E5%8F%B7%E8%B0%83%E7%90%86%E7%94%B5%E8%B7%AF%E5%88%86%E6%9E%90"><span class="toc-number">6.</span> <span class="toc-text">LLC 信号调理电路分析</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%94%B5%E5%8E%8B%E4%B8%8E%E8%BE%93%E5%87%BA%E7%94%B5%E6%B5%81%E9%87%87%E6%A0%B7"><span class="toc-number">6.1.</span> <span class="toc-text">输出电压与输出电流采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%9B%AE%E6%A0%87%E7%94%B5%E5%8E%8B%E8%B0%83%E8%8A%82-%E7%94%B5%E4%BD%8D%E5%99%A8%E9%87%87%E6%A0%B7"><span class="toc-number">6.2.</span> <span class="toc-text">输出目标电压调节 (电位器采样)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MOS-%E7%AE%A1%E4%B8%8E%E4%BA%8C%E6%9E%81%E7%AE%A1%E6%B8%A9%E5%BA%A6%E9%87%87%E6%A0%B7"><span class="toc-number">6.3.</span> <span class="toc-text">MOS 管与二极管温度采样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LLC-%E8%B0%90%E6%8C%AF%E7%94%B5%E6%B5%81%E8%BD%AC%E7%94%B5%E5%8E%8B%E9%87%87%E6%A0%B7-%E8%BF%87%E6%B5%81%E4%BF%9D%E6%8A%A4-OCP"><span class="toc-number">6.4.</span> <span class="toc-text">LLC 谐振电流转电压采样 (过流保护 OCP)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%9D%BF%E6%8E%A5%E5%8F%A3%E6%B1%87%E6%B5%81"><span class="toc-number">6.5.</span> <span class="toc-text">控制板接口汇流</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/" title="硬件电路原理图分析"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="硬件电路原理图分析"/></a><div class="content"><a class="title" href="/blog/%E7%A1%AC%E4%BB%B6%E7%94%B5%E8%B7%AF%E5%8E%9F%E7%90%86%E5%9B%BE%E5%88%86%E6%9E%90/" title="硬件电路原理图分析">硬件电路原理图分析</a><time datetime="2026-07-14T07:29:19.000Z" title="发表于 2026-07-14 15:29:19">2026-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97/" title="全桥LLC主功率电路计算"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="全桥LLC主功率电路计算"/></a><div class="content"><a class="title" href="/blog/%E5%85%A8%E6%A1%A5LLC%E4%B8%BB%E5%8A%9F%E7%8E%87%E7%94%B5%E8%B7%AF%E8%AE%A1%E7%AE%97/" title="全桥LLC主功率电路计算">全桥LLC主功率电路计算</a><time datetime="2026-07-10T08:12:53.000Z" title="发表于 2026-07-10 16:12:53">2026-07-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/PFC%E5%8A%9F%E7%8E%87%E7%BA%A7%E5%99%A8%E4%BB%B6%E8%AE%A1%E7%AE%97%E5%8F%8A%E9%80%89%E5%9E%8B/" title="PFC功率级器件计算及选型"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/PFC%E5%8A%9F%E7%8E%87%E7%BA%A7%E5%99%A8%E4%BB%B6%E8%AE%A1%E7%AE%97%E5%8F%8A%E9%80%89%E5%9E%8B/PFC%E5%8A%9F%E7%8E%87%E7%BA%A7%E5%99%A8%E4%BB%B6%E8%AE%A1%E7%AE%97%E5%8F%8A%E9%80%89%E5%9E%8B.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PFC功率级器件计算及选型"/></a><div class="content"><a class="title" href="/blog/PFC%E5%8A%9F%E7%8E%87%E7%BA%A7%E5%99%A8%E4%BB%B6%E8%AE%A1%E7%AE%97%E5%8F%8A%E9%80%89%E5%9E%8B/" title="PFC功率级器件计算及选型">PFC功率级器件计算及选型</a><time datetime="2026-07-09T12:09:18.000Z" title="发表于 2026-07-09 20:09:18">2026-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/LLC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E4%B8%8EMatlab%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B/" title="LLC理论基础与Matlab仿真模型"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/LLC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E4%B8%8EMatlab%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B/LLC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E4%B8%8EMatlab%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LLC理论基础与Matlab仿真模型"/></a><div class="content"><a class="title" href="/blog/LLC%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E4%B8%8EMatlab%E4%BB%BF%E7%9C%9F%E6%A8%A1%E5%9E%8B/" title="LLC理论基础与Matlab仿真模型">LLC理论基础与Matlab仿真模型</a><time datetime="2026-07-08T07:51:22.000Z" title="发表于 2026-07-08 15:51:22">2026-07-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/PFC%E4%B8%8EBoost%E7%94%B5%E8%B7%AF/" title="PFC与Boost电路"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/PFC%E4%B8%8EBoost%E7%94%B5%E8%B7%AF/PFC%E4%B8%8EBoost%E7%94%B5%E8%B7%AF.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PFC与Boost电路"/></a><div class="content"><a class="title" href="/blog/PFC%E4%B8%8EBoost%E7%94%B5%E8%B7%AF/" title="PFC与Boost电路">PFC与Boost电路</a><time datetime="2026-07-06T05:06:29.000Z" title="发表于 2026-07-06 13:06:29">2026-07-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2026 By one by one</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.2
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
+            const target = node.parentNode
+            if (target.nodeName.toLowerCase() === 'li') {
+              target.parentNode.classList.add('has-jax')
+            } else {
+              target.classList.add('has-jax')
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script></div><script defer src="/js/light.js"></script><script async data-pjax src="/js/randombg.js"></script><div class="aplayer no-destroy" data-id="7911809559" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script defer src="https://cdn.jsdelivr.net/gh/CodeByZach/pace/pace.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="https://www.fomal.cc/static/js/runtime.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/工具.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt="">工具</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/tools/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/视频网址.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-24</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt="">视频网址</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/videos/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/工具.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-06-30</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt="">linux</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/linux/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/roll02.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-07-23</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt="">UDP</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/UDP/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/STM32避障小车.webp" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-01-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt="">STM32避障小车</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;blog/STM32避障小车/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = '/';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__bounceInLeft');
+    arr[i].setAttribute('data-wow-duration', '2s');
+    arr[i].setAttribute('data-wow-delay', '1s');
+    arr[i].setAttribute('data-wow-offset', '100');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__bounceInRight');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script><script async="async">var arr = document.getElementsByClassName('pagination');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__rotateInDownLeft');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://npm.elemecdn.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
